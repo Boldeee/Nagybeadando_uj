@@ -2,13 +2,14 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 
+using namespace std;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    RGB szinek(0,0,0);
-    szin=QVector<QVector<RGB>>(3,QVector<RGB>(5,szinek));
+    beolvas(szin,termelok);
     //kiirat(szin);
 }
 struct  RGB
@@ -25,7 +26,49 @@ struct  RGB
         b=_b;
     }
 };
+struct koord
+{
+    int x,y;
+    QVector<int> type;
+    koord()
+    {
+        x=-1;
+        y=-1;
+        QVector<int> type;//0:(0 üres, 1 termelo, 2 fogyaszto),1:(hany tickenkent/hanyat var),2:(mit termel/mit fogyaszt),3:(mit fogyaszt meg)...10(mit fogyaszt meg)
+    }
+    koord(int _x,int _y)
+    {
+        x=_x;
+        y=_y;
+    }
+};
 
+
+void beolvas(QVector<QVector<RGB>>&szin,QMap<QString,koord>&termelok)
+{
+    ifstream is("initial.txt");
+    int n,m;
+    QString ss;
+    is>>n >>m;
+    RGB szinek(0,0,0);
+    szin=QVector<QVector<RGB>>(n,QVector<RGB>(m,szinek));
+    RGB k;
+    koord kord;
+    if(k.r==1)
+    {
+        if(k.g==1)
+        {
+           if(k.b==1)
+           {
+               kord.type[7]--;
+           }
+           kord.type[5]--;
+        }else if(k.b==1){
+
+        }
+        kord.type[1]--;
+    }
+}
 MainWindow::~MainWindow()
 {
     delete ui;
