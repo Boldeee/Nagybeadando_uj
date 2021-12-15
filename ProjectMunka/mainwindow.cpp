@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     Upload();
+    placement();
 }
 
 MainWindow::~MainWindow()
@@ -25,9 +26,10 @@ void MainWindow::Upload()
         QTextStream stream(&infile);
         line = stream.readLine();
         linesplit = line.split(QLatin1Char(','), Qt::SkipEmptyParts);
-        Parameters s;
-        s.x = linesplit[0].toInt();
-        s.y = linesplit[1].toInt();
+        XX= linesplit[0].toInt();
+        YY= linesplit[1].toInt();
+        Parameters s(XX,YY);
+
         //qDebug() << s.x;
         //qDebug() << s.y;
         //Ide egy void generate_field() különben nincs tárolás, és a többi résznek kell tudni tájékozódni
@@ -77,23 +79,51 @@ void MainWindow::Upload()
         }
         setInfo(Infotmp);
         infile.close();
+        /*for(QMap<int,QVector<int>>::iterator ss=Infotmp.begin();ss!=Infotmp.end();ss++)
+        {
+            qDebug()<<ss.key()<<*ss;
+        }*/
     }
 }
 
 void MainWindow::Generate_Field(int x, int y)
 {
     //qDebug() << "Beléptem a Generate Fieldbe";
-    QVector<QVector<int>> Fieldtmp(x, QVector<int>(y));
+    QVector<QMap<int,QVector<int>>> Fieldtmp(x);
+    QVector<int> tempo(8,0);//8 darab adatot tarolunk el[...] kesobbiekben a termelok csak 3as vektorok lesznek
     for (int i = 0; i < x ;i++ ) {
        // qDebug() << "Beléptem a Generate Fieldbe ebbe a részébe is";
         for (int j = 0; j < y ;j++ ) {
-           // qDebug() << ((i+1)*10+(j+1));
-        Fieldtmp[i][j] = ((i+1)*10+(j+1));
+            //qDebug() << ((i+1)*10+(j+1));
+            Fieldtmp[i][(i+1)*10+(j+1)]=tempo;
+            //qDebug()<<Fieldtmp[i][(i+1)*10+(j+1)];
         }
 
     }
     setField(Fieldtmp);
-    qDebug() << "Pipa";
+    //qDebug() << "Pipa";
+}
+void MainWindow::placement()
+{
+    for(int i=0;i<Field.size();i++)
+    {
+        for(QMap<int,QVector<int>>::iterator it2=Field[i].begin();it2!=Field[i].end();it2++)
+        {
+        for (QMap<int, QVector<int> >::iterator it=Info.begin();it!=Info.end();it++)
+        {
+               if(it2.key()==it.key())
+               {
+                   *it2=*it;
+               }
+        }
+        }
+    }
+    /*for (int i = 0; i < XX ;i++ ) {
+        for (int j = 0; j < YY ;j++ ) {
+            qDebug() << ((i+1)*10+(j+1));
+            qDebug()<<Field[i][(i+1)*10+(j+1)];
+        }}*/
+
 }
 
 const QMap<int, QVector<int> > &MainWindow::getInfo() const
@@ -106,12 +136,12 @@ void MainWindow::setInfo(const QMap<int, QVector<int> > &newInfo)
     Info = newInfo;
 }
 
-const QVector<QVector<int> > &MainWindow::getField() const
+const QVector<QMap<int,QVector<int>>> &MainWindow::getField() const
 {
     return Field;
 }
 
-void MainWindow::setField(const QVector<QVector<int> > &newField)
+void MainWindow::setField(const QVector<QMap<int,QVector<int>>> &newField)
 {
     Field = newField;
 }

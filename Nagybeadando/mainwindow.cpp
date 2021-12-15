@@ -64,7 +64,35 @@ void beolvas(QVector<QVector<RGB>>&szin,QMap<QString,koord>&termelok)
            }
            kord.type[5]--;
         }else if(k.b==1){
-
+           kord.type[4]--;
+        }
+        kord.type[1]--;
+    }
+    if(k.g==1)
+    {
+        if(k.g==1)
+        {
+           if(k.b==1)
+           {
+               kord.type[7]--;
+           }
+           kord.type[5]--;
+        }else if(k.b==1){
+           kord.type[4]--;
+        }
+        kord.type[1]--;
+    }
+    if(k.b==1)
+    {
+        if(k.g==1)
+        {
+           if(k.b==1)
+           {
+               kord.type[7]--;
+           }
+           kord.type[5]--;
+        }else if(k.b==1){
+           kord.type[4]--;
         }
         kord.type[1]--;
     }

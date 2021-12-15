@@ -5,6 +5,9 @@
 #include <QMap>
 #include <QFile>
 #include <QDebug>
+#include <QVector>
+#include <QStringList>
+#include <QTextStream>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,14 +20,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    const QVector<QVector<int> > &getField() const;
-    void setField(const QVector<QVector<int> > &newField);
+    int XX,YY;
+    const QVector<QMap<int,QVector<int>>> &getField() const;
+    void setField(const QVector<QMap<int,QVector<int>>> &newField);
 
     const QMap<int, QVector<int> > &getInfo() const;
     void setInfo(const QMap<int, QVector<int> > &newInfo);
-
-private:
-    Ui::MainWindow *ui;
     struct Parameters
     {
         int x;
@@ -32,28 +33,38 @@ private:
 
         Parameters()
         {
-        x = -1;
-        y = -1;
+            x=-1;
+            y=-1;
         }
         Parameters(int _x, int _y)
         {
             x = _x;
             y = _y;
         }
+    int get_x()
+    {
+        return x;
+    }
+    int get_y()
+    {
+        return y;
+    }
     };
 
+private:
+    Ui::MainWindow *ui;
 
     struct Info{
     int ID;
     QVector<int> Info;
     /*0)mi ez
-1)termelo mit termel/fogyaszto Red mennyi/ Üres ha van rajta Red
-2)termelo hany tik/fogyaszto Green mennyi/Üres ha van rajta Green
-3)fogyaszto Kék Mennyi/ Üres ha van benne Blue
-4)fogyaszto R+G / Üres R+G
-5)fogyaszto R+B/ Üres R+B
-6)fogyaszto G+B/ Üres G+B
-7)fogyaszto R+G+B/ Üres R+G+B
+1)termelo mit termel/   fogyaszto Red mennyi/       Üres R
+2)termelo hany tik/     fogyaszto Green mennyi/     Üres G
+3)                      fogyaszto Kék Mennyi/       Üres B
+4)                      fogyaszto R+G /             Üres R+G
+5)                      fogyaszto R+B/              Üres R+B
+6)                      fogyaszto G+B/              Üres G+B
+7)                      fogyaszto R+G+B/            Üres R+G+B
      */
     };
 
@@ -63,11 +74,11 @@ private:
     int g;
     int b;
     };
-    //
 
     void Upload();
     void Generate_Field(int x, int y);
-    QVector<QVector<int>> Field;
+    void placement();
+    QVector<QMap<int,QVector<int>>> Field;
     QMap<int, QVector<int>> Info;
 
 };
