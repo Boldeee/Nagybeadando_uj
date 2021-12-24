@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     Upload();
     placement();
+    tavolsag m(termelok,fogyasztok);
+
 }
 
 MainWindow::~MainWindow()
@@ -28,16 +30,11 @@ void MainWindow::Upload()
         linesplit = line.split(QLatin1Char(','), Qt::SkipEmptyParts);
         XX= linesplit[0].toInt();
         YY= linesplit[1].toInt();
-        Parameters s(XX,YY);
-
-        //qDebug() << s.x;
-        //qDebug() << s.y;
-        //Ide egy void generate_field() különben nincs tárolás, és a többi résznek kell tudni tájékozódni
-        Generate_Field(s.x , s.y);
+        Generate_Field(XX , YY);
         line = stream.readLine();
         howmany = line.toInt();
         //qDebug() << howmany;
-        QMap<int, QVector<int>> Infotmp;
+        QVector<Informacio> Infotmp;
         for(int i = 0; i < howmany; i++)
         {
             //qDebug() << "Beléptem";
@@ -52,96 +49,101 @@ void MainWindow::Upload()
            else if (linesplit[2].toInt() == 1)
            {
                //qDebug() << "Chad Termelő";
-               QVector<int> tmp;
-               tmp.push_back(linesplit[2].toInt()); //Termelő jelölés
-               tmp.push_back(linesplit[3].toInt()); //
-               tmp.push_back(linesplit[4].toInt()); //Hány Tic
+               Informacio tmp;
+               tmp.ID=linesplit[2].toInt(); //Termelő jelölés
+               if(linesplit[3].toInt()==1)tmp.r=1;
+               if(linesplit[3].toInt()==2)tmp.g=1;
+               if(linesplit[3].toInt()==3)tmp.b=1;
+               tmp.freq=linesplit[4].toInt(); //Hány Tickenként
                //qDebug() << linesplit[2] << linesplit[3] << linesplit[4];
-               Infotmp[linesplit[0].toInt()*10+linesplit[1].toInt()] = tmp;
+               tmp.x=linesplit[0].toInt();
+               tmp.y=linesplit[1].toInt();
+               Infotmp.push_back(tmp);
+               termelok.insert(tmp);
            }
            else if (linesplit[2].toInt() == 2) {
                //qDebug() << "Béta Fogyasztó";
-               QVector<int> tmp;
-               /*for(QStringList::iterator it = linesplit.begin()+2; it != linesplit.end(); it++)
-               {
-               tmp.push_back(*it).toInt();
-               }Nemvágom miért nem mükszik de ez szépítésnek jó lenne*/
-               tmp.push_back(linesplit[2].toInt()); //Fogyasztó jelölés
-               tmp.push_back(linesplit[3].toInt()); //Mennyi R
-               tmp.push_back(linesplit[4].toInt()); //Mennyi G
-               tmp.push_back(linesplit[5].toInt()); //Mennyi B
-               tmp.push_back(linesplit[6].toInt()); //Mennyi R+G
-               tmp.push_back(linesplit[7].toInt()); //Mennyi R+B
-               tmp.push_back(linesplit[8].toInt()); //Mennyi B+G
-               tmp.push_back(linesplit[9].toInt()); //Mennyi R+G+B
-               Infotmp[linesplit[0].toInt()*10+linesplit[1].toInt()] = tmp;
+               Informacio tmp;
+               tmp.ID=linesplit[2].toInt(); //Fogyasztó jelölés
+               tmp.need_r=linesplit[3].toInt(); //Mennyi R
+               tmp.need_g=linesplit[4].toInt(); //Mennyi G
+               tmp.need_b=linesplit[5].toInt(); //Mennyi B
+               tmp.need_r_g=linesplit[6].toInt(); //Mennyi R+G
+               tmp.need_r_b=linesplit[7].toInt(); //Mennyi R+B
+               tmp.need_g_b=linesplit[8].toInt(); //Mennyi B+G
+               tmp.need_w=linesplit[9].toInt(); //Mennyi R+G+B
+               tmp.x=linesplit[0].toInt();
+               tmp.y=linesplit[1].toInt();
+               Infotmp.push_back(tmp);
+               fogyasztok.insert(tmp);
+
            }
         }
         setInfo(Infotmp);
         infile.close();
-        /*for(QMap<int,QVector<int>>::iterator ss=Infotmp.begin();ss!=Infotmp.end();ss++)
-        {
-            qDebug()<<ss.key()<<*ss;
-        }*/
+
     }
 }
 
 void MainWindow::Generate_Field(int x, int y)
 {
     //qDebug() << "Beléptem a Generate Fieldbe";
-    QVector<QMap<int,QVector<int>>> Fieldtmp(x);
-    QVector<int> tempo(8,0);//8 darab adatot tarolunk el[...] kesobbiekben a termelok csak 3as vektorok lesznek
+    QVector<QVector<Informacio>> Fieldtmp(x,QVector<Informacio>(y));
+    /*//QVector<Informacio> tempo;
     for (int i = 0; i < x ;i++ ) {
        // qDebug() << "Beléptem a Generate Fieldbe ebbe a részébe is";
         for (int j = 0; j < y ;j++ ) {
             //qDebug() << ((i+1)*10+(j+1));
-            Fieldtmp[i][(i+1)*10+(j+1)]=tempo;
+            //Fieldtmp[i]=tempo;
             //qDebug()<<Fieldtmp[i][(i+1)*10+(j+1)];
         }
 
-    }
+    }*/
     setField(Fieldtmp);
-    //qDebug() << "Pipa";
 }
 void MainWindow::placement()
 {
+    /*for(int ss=0;ss<Info.size();ss++)
+    {
+        qDebug()<<Info[ss].ID<<Info[ss].x<<Info[ss].y;
+    }*/
     for(int i=0;i<Field.size();i++)
     {
-        for(QMap<int,QVector<int>>::iterator it2=Field[i].begin();it2!=Field[i].end();it2++)
+        for(int it2=0;it2<Field[i].size();it2++)
         {
-        for (QMap<int, QVector<int> >::iterator it=Info.begin();it!=Info.end();it++)
+        for (int it=0;it<Info.size();it++)
         {
-               if(it2.key()==it.key())
+               if(it2==Info[it].y&&i==Info[it].x)
                {
-                   *it2=*it;
+                   Field[i][it2]=Info[it];
                }
         }
         }
     }
-    /*for (int i = 0; i < XX ;i++ ) {
+    /*int szamlalo=1;
+    for (int i = 0; i < XX ;i++ ) {
         for (int j = 0; j < YY ;j++ ) {
-            qDebug() << ((i+1)*10+(j+1));
-            qDebug()<<Field[i][(i+1)*10+(j+1)];
+            if(Field[i][j].ID!=0)
+            {
+            qDebug()<<Field[i][j].ID<<szamlalo ;
+            szamlalo++;
+            }
         }}*/
-
 }
 
-const QMap<int, QVector<int> > &MainWindow::getInfo() const
+const QVector<MainWindow::Informacio> &MainWindow::getInfo() const
 {
     return Info;
 }
-
-void MainWindow::setInfo(const QMap<int, QVector<int> > &newInfo)
-{
-    Info = newInfo;
-}
-
-const QVector<QMap<int,QVector<int>>> &MainWindow::getField() const
+const QVector<QVector<MainWindow::Informacio>> &MainWindow::getField() const
 {
     return Field;
 }
-
-void MainWindow::setField(const QVector<QMap<int,QVector<int>>> &newField)
+void MainWindow::setInfo(const QVector<Informacio> &newInfo)
+{
+    Info = newInfo;
+}
+void MainWindow::setField(const QVector<QVector<Informacio>> &newField)
 {
     Field = newField;
 }
