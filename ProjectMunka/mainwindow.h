@@ -8,11 +8,13 @@
 #include <QVector>
 #include <QStringList>
 #include <QTextStream>
+#include <cmath>
+#include <iostream>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
-typedef QVector<QVector<int>> matrix;
+typedef QVector<QVector<double>> matrix;
 
 class MainWindow : public QMainWindow
 {
@@ -46,8 +48,8 @@ public:
     7)                      fogyaszto R+G+B/            Üres R+G+B
      */
     };
-    QSet<Informacio> termelok;
-    QSet<Informacio>fogyasztok;
+    QVector<Informacio> termelok;
+    QVector<Informacio> fogyasztok;
     QVector<matrix> maszkok;
     int XX,YY;
 
@@ -55,13 +57,12 @@ public slots:
 
     void setField(const QVector<QVector<Informacio>> &newField);
     void setInfo(const QVector<Informacio> &newInfo);
-    void tavolsag(QVector<QVector<int>>& maszk,int fogyasztoX,int fogyasztoY);
+    void tavolsag(QVector<QVector<double>>& maszk,int fogyasztoX,int fogyasztoY);
     double tavolsag_alt(double x1,double y1,double x2, double y2);
 
 private:
 
     const QVector<QVector<Informacio> > &getField() const;
-
     const QVector<Informacio> &getInfo() const;
 
     Ui::MainWindow *ui;

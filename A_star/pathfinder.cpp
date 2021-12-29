@@ -63,11 +63,11 @@ bool operator<(State const &s1,State const &s2)
 }
 void PathFinder::getPath(vector<Coordinate> &shortestPath, vector<Coordinate> &discoveredFields)
 {
-    int size_x=fieldmatrix[0].size();
-    int size_y=fieldmatrix.size();
+    int size_x=fieldmatrix[0].size();//XX
+    int size_y=fieldmatrix.size();//YY
 
-    vector<vector<rovidut>> utmatrix(size_y,vector<rovidut>(size_x));
-    utmatrix[origin.x][origin.y]=rovidut(origin.x,origin.y,0);
+    vector<vector<rovidut>> utmatrix(size_y,vector<rovidut>(size_x));//rovidut: elozo x,y-t tarolja
+    utmatrix[origin.x][origin.y]=rovidut(origin.x,origin.y,0);//origin.x=termelo x, y u.a.
 
     priority_queue<State> stateQueue;
     State initState(origin.x,origin.y,0);
@@ -87,12 +87,12 @@ void PathFinder::getPath(vector<Coordinate> &shortestPath, vector<Coordinate> &d
                 {
                     int newX=actualstate.x+i;
                     int newY=actualstate.y+j;
-                    if(       newX>=0
-                            &&newY>=0
-                            &&newX<size_x
-                            &&newY<size_y
-                            &&fieldmatrix[newX][newY]==0
-                            &&utmatrix[newX][newY].tav>actualstate.tavolsag+1)
+                    if(       newX>=0    //innentol
+                            &&newY>=0    //
+                            &&newX<size_x//
+                            &&newY<size_y//idaig nem futottunk-e le aterkeprol
+                            &&fieldmatrix[newX][newY]==0//nem fal-e
+                            &&utmatrix[newX][newY].tav>actualstate.tavolsag+1)//lepesek durvasaga
                     {
 
                         State newstate(newX,newY,actualstate.tavolsag+1);
@@ -110,6 +110,7 @@ void PathFinder::getPath(vector<Coordinate> &shortestPath, vector<Coordinate> &d
     }
     rovidut it= utmatrix[final.x][final.y];
     while (it.xbol!=origin.x||it.ybol!=origin.y){
+        qDebug()<<"ASD";
         shortestPath.push_back(Coordinate(it.xbol,it.ybol));
         it=utmatrix[it.xbol][it.ybol];
     }

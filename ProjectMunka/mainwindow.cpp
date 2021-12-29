@@ -58,7 +58,7 @@ void MainWindow::Upload()
                tmp.x=linesplit[0].toInt();
                tmp.y=linesplit[1].toInt();
                Infotmp.push_back(tmp);
-               termelok.insert(tmp);
+               termelok.push_back(tmp);
 
            }
            else if (linesplit[2].toInt() == 2) {
@@ -75,10 +75,10 @@ void MainWindow::Upload()
                tmp.x=linesplit[0].toInt();
                tmp.y=linesplit[1].toInt();
                tmp.fogyasztoID=fogyasztoszam;               //Azert kell mert a maszkok[i]-edik matrixa aza valahanyas fogyasztoID-hez kapcsolodik
-               QVector<QVector<int>> maszk(XX,QVector<int>(YY,0));
+               QVector<QVector<double>> maszk(XX,QVector<double>(YY,0));
                tavolsag(maszk,tmp.x,tmp.y);
                Infotmp.push_back(tmp);
-               fogyasztok.insert(tmp);
+               fogyasztok.push_back(tmp);
                maszkok.push_back(maszk);
                fogyasztoszam++;
            }
@@ -134,14 +134,16 @@ void MainWindow::placement()
             }
         }}*/
 }
-void MainWindow::tavolsag(QVector<QVector<int>>& maszk,int fogyasztoX,int fogyasztoY)//csinal egy maszkot amin az adott fogyasztotol vett..
+void MainWindow::tavolsag(QVector<QVector<double>>& maszk,int fogyasztoX,int fogyasztoY)//csinal egy maszkot amin az adott fogyasztotol vett..
 {                                                                                   //..tavolsagok vannak eltarolva
     for(int i=0;i<maszk.size();i++)
     {
         for(int j=0;j<maszk[i].size();j++)
         {
             maszk[i][j]=tavolsag_alt(i,j,fogyasztoX,fogyasztoY);
+            qDebug()<<maszk[i][j]<<' ';
         }
+        qDebug()<<' ';
     }
 }
 double MainWindow::tavolsag_alt(double x1,double y1,double x2, double y2)

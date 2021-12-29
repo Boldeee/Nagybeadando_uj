@@ -243,6 +243,10 @@ release/moc_mainwindow.cpp: ../ProjectMunka/mainwindow.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qfile.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qfiledevice.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QDebug \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QVector \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvector.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QStringList \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QTextStream \
 		release/moc_predefs.h \
 		C:/Qt/6.1.3/mingw81_64/bin/moc.exe
 	C:\Qt\6.1.3\mingw81_64\bin\moc.exe $(DEFINES) --include "D:/QT Projects/Nagybeadando/Nagybeadando_uj/build-ProjectMunka-Desktop_Qt_6_1_3_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.1.3/mingw81_64/mkspecs/win32-g++ -I"D:/QT Projects/Nagybeadando/Nagybeadando_uj/ProjectMunka" -IC:/Qt/6.1.3/mingw81_64/include -IC:/Qt/6.1.3/mingw81_64/include/QtWidgets -IC:/Qt/6.1.3/mingw81_64/include/QtGui -IC:/Qt/6.1.3/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\ProjectMunka\mainwindow.h -o release\moc_mainwindow.cpp
@@ -405,6 +409,10 @@ release/main.o: ../ProjectMunka/main.cpp ../ProjectMunka/mainwindow.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qfile.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qfiledevice.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QDebug \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QVector \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvector.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QStringList \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QTextStream \
 		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qapplication.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcoreapplication.h \
@@ -549,6 +557,10 @@ release/mainwindow.o: ../ProjectMunka/mainwindow.cpp ../ProjectMunka/mainwindow.
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qfile.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qfiledevice.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QDebug \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QVector \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvector.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QStringList \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QTextStream \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\ProjectMunka\mainwindow.cpp
 

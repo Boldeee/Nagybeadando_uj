@@ -24,7 +24,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     const uint offsetsAndSize[36];
-    char stringdata0[170];
+    char stringdata0[173];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs), len 
@@ -39,20 +39,20 @@ QT_MOC_LITERAL(55, 7), // "setInfo"
 QT_MOC_LITERAL(63, 17), // "QList<Informacio>"
 QT_MOC_LITERAL(81, 7), // "newInfo"
 QT_MOC_LITERAL(89, 8), // "tavolsag"
-QT_MOC_LITERAL(98, 18), // "QList<QList<int>>&"
-QT_MOC_LITERAL(117, 5), // "maszk"
-QT_MOC_LITERAL(123, 10), // "fogyasztoX"
-QT_MOC_LITERAL(134, 10), // "fogyasztoY"
-QT_MOC_LITERAL(145, 12), // "tavolsag_alt"
-QT_MOC_LITERAL(158, 2), // "x1"
-QT_MOC_LITERAL(161, 2), // "y1"
-QT_MOC_LITERAL(164, 2), // "x2"
-QT_MOC_LITERAL(167, 2) // "y2"
+QT_MOC_LITERAL(98, 21), // "QList<QList<double>>&"
+QT_MOC_LITERAL(120, 5), // "maszk"
+QT_MOC_LITERAL(126, 10), // "fogyasztoX"
+QT_MOC_LITERAL(137, 10), // "fogyasztoY"
+QT_MOC_LITERAL(148, 12), // "tavolsag_alt"
+QT_MOC_LITERAL(161, 2), // "x1"
+QT_MOC_LITERAL(164, 2), // "y1"
+QT_MOC_LITERAL(167, 2), // "x2"
+QT_MOC_LITERAL(170, 2) // "y2"
 
     },
     "MainWindow\0setField\0\0QList<QList<Informacio>>\0"
     "newField\0setInfo\0QList<Informacio>\0"
-    "newInfo\0tavolsag\0QList<QList<int>>&\0"
+    "newInfo\0tavolsag\0QList<QList<double>>&\0"
     "maszk\0fogyasztoX\0fogyasztoY\0tavolsag_alt\0"
     "x1\0y1\0x2\0y2"
 };
@@ -94,7 +94,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->setField((*reinterpret_cast< const QList<QList<Informacio>>(*)>(_a[1]))); break;
         case 1: _t->setInfo((*reinterpret_cast< const QList<Informacio>(*)>(_a[1]))); break;
-        case 2: _t->tavolsag((*reinterpret_cast< QList<QList<int>>(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 2: _t->tavolsag((*reinterpret_cast< QList<QList<double>>(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         case 3: { double _r = _t->tavolsag_alt((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])));
             if (_a[0]) *reinterpret_cast< double*>(_a[0]) = std::move(_r); }  break;
         default: ;
@@ -110,7 +110,7 @@ const QMetaObject MainWindow::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_MainWindow_t
 
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<QVector<Informacio>> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<Informacio> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QVector<QVector<int>> &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<QVector<Informacio>> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<Informacio> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QVector<QVector<double>> &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>
 
 
 >,
