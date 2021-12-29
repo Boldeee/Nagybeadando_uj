@@ -8,8 +8,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     Upload();
     placement();
-    tavolsag m(termelok,fogyasztok);
-
 }
 
 MainWindow::~MainWindow()
@@ -37,6 +35,7 @@ void MainWindow::Upload()
         QVector<Informacio> Infotmp;
         for(int i = 0; i < howmany; i++)
         {
+           int fogyasztoszam=0;
             //qDebug() << "Beléptem";
            line = stream.readLine();
            linesplit = line.split(QLatin1Char(','), Qt::SkipEmptyParts);
@@ -60,6 +59,7 @@ void MainWindow::Upload()
                tmp.y=linesplit[1].toInt();
                Infotmp.push_back(tmp);
                termelok.insert(tmp);
+
            }
            else if (linesplit[2].toInt() == 2) {
                //qDebug() << "Béta Fogyasztó";
@@ -74,9 +74,13 @@ void MainWindow::Upload()
                tmp.need_w=linesplit[9].toInt(); //Mennyi R+G+B
                tmp.x=linesplit[0].toInt();
                tmp.y=linesplit[1].toInt();
+               tmp.fogyasztoID=fogyasztoszam;               //Azert kell mert a maszkok[i]-edik matrixa aza valahanyas fogyasztoID-hez kapcsolodik
+               QVector<QVector<int>> maszk(XX,QVector<int>(YY,0));
+               tavolsag(maszk,tmp.x,tmp.y);
                Infotmp.push_back(tmp);
                fogyasztok.insert(tmp);
-
+               maszkok.push_back(maszk);
+               fogyasztoszam++;
            }
         }
         setInfo(Infotmp);
@@ -130,7 +134,22 @@ void MainWindow::placement()
             }
         }}*/
 }
-
+void MainWindow::tavolsag(QVector<QVector<int>>& maszk,int fogyasztoX,int fogyasztoY)//csinal egy maszkot amin az adott fogyasztotol vett..
+{                                                                                   //..tavolsagok vannak eltarolva
+    for(int i=0;i<maszk.size();i++)
+    {
+        for(int j=0;j<maszk[i].size();j++)
+        {
+            maszk[i][j]=tavolsag_alt(i,j,fogyasztoX,fogyasztoY);
+        }
+    }
+}
+double MainWindow::tavolsag_alt(double x1,double y1,double x2, double y2)
+{
+    double eredmeny=-1;
+    eredmeny=sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+    return eredmeny;
+}
 const QVector<MainWindow::Informacio> &MainWindow::getInfo() const
 {
     return Info;

@@ -8,17 +8,20 @@
 #include <QVector>
 #include <QStringList>
 #include <QTextStream>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+typedef QVector<QVector<int>> matrix;
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+
     struct Informacio // initially egy üres bázist állit be mindenhova, majd azt változtatjuk
     {
     int x=-1,y=-1,r=0,g=0,b=0;
@@ -32,6 +35,7 @@ public:
         int need_g_b=0;//cyan
             int need_w=0;//feher
     int ID=0;
+    int fogyasztoID=-1;
   /*0)mi ez
     1)termelo mit termel/   fogyaszto Red mennyi/       Üres R
     2)termelo hany tik/     fogyaszto Green mennyi/     Üres G
@@ -44,16 +48,15 @@ public:
     };
     QSet<Informacio> termelok;
     QSet<Informacio>fogyasztok;
-    struct tavolsag
-    {
-        tavolsag(QSet<Informacio>& term,QSet<Informacio>& fogy){
-
-        }
-    };
-
+    QVector<matrix> maszkok;
     int XX,YY;
+
+public slots:
+
     void setField(const QVector<QVector<Informacio>> &newField);
     void setInfo(const QVector<Informacio> &newInfo);
+    void tavolsag(QVector<QVector<int>>& maszk,int fogyasztoX,int fogyasztoY);
+    double tavolsag_alt(double x1,double y1,double x2, double y2);
 
 private:
 
