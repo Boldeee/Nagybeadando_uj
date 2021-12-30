@@ -4,12 +4,18 @@
 #include <QMainWindow>
 #include <QMap>
 #include <QFile>
-#include <QDebug>
+//#include <QDebug>
 #include <QVector>
 #include <QStringList>
 #include <QTextStream>
 #include <cmath>
 #include <iostream>
+#include <QSet>
+#include <cmath>
+#include <list>
+#include <queue>
+#include "builder.h"
+#include "routemaker.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -52,9 +58,10 @@ public:
     QVector<Informacio> fogyasztok;
     QVector<matrix> maszkok;
     int XX,YY;
+    bool animation; //Lehet kelleni fog
 
 public slots:
-
+    void setupField(int XX, int YY);
     void setField(const QVector<QVector<Informacio>> &newField);
     void setInfo(const QVector<Informacio> &newInfo);
     void tavolsag(QVector<QVector<double>>& maszk,int fogyasztoX,int fogyasztoY);
@@ -70,8 +77,13 @@ private:
     void Generate_Field(int x, int y);
     void placement();
 
+    RouteMaker BrumBrum;
+    int inspected_Producer;
+    int inspected_Consumer;
+
     QVector<QVector<Informacio>> Field;
     QVector<Informacio> Info;
-
+    QVector<Builder*> buildvector;
+    QVector<Builder*> selectvector; //Lehet szemet
 };
 #endif // MAINWINDOW_H

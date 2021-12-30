@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "builder.h"
+#include <QTime> //dunno
+#include <QKeyEvent> //dunno2.0
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -8,12 +10,54 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     Upload();
     placement();
+    setupField(XX , YY);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::setupField(int XX, int YY)
+{
+    qDeleteAll(ui->gridLayout->children());
+    for (Builder * b: buildvector )
+    {
+        delete b;
+    }
+    buildvector.clear();
+
+    int size = std::min(500/XX, 500/YY);
+
+    ui->gridLayout->setSpacing(size/10);
+    ui->widthBox->setValue(XX);
+    ui->heightBox->setValue(YY);
+
+    for(int i=0; i<XX; i++)
+    {
+        for(int j=0; j<YY; j++)
+        {
+            Builder *b = new Builder(i , j ,size);
+            ui->gridLayout->addWidget(b, i ,j);
+            buildvector.push_back(b);
+            b->setFunction(Builder::base);
+            /*connect(f,&Field::clicked,this, &MainWindow::on_field_clicked);
+            connect(f,&Field::hovered,this, &MainWindow::on_field_hovered);*/
+            //Sztem nem kell
+        }
+    }
+    //LENYEGES RESZ SAFOI(ASDUFOUASDKUHGIUSDHUFGOUILDSAHG
+    BrumBrum = RouteMaker(XX, YY);
+    BrumBrum.setStart(inspected_Producer);
+    BrumBrum.setEnd(inspected_Consumer); //Ide kene majd a mindenseg is, vagy lehet skippelni idk
+    /*setOrigin(0,0);
+    setFinal(x-1, y-1);
+    shiftPressed = false;
+    ctrlPressed = false;
+    mousePressed = false; Ez szerintem nem kell*/
+}
+
+
 
 void MainWindow::Upload()
 {
@@ -134,6 +178,7 @@ void MainWindow::placement()
             }
         }}*/
 }
+
 void MainWindow::tavolsag(QVector<QVector<double>>& maszk,int fogyasztoX,int fogyasztoY)//csinal egy maszkot amin az adott fogyasztotol vett..
 {                                                                                   //..tavolsagok vannak eltarolva
     for(int i=0;i<maszk.size();i++)
@@ -141,9 +186,9 @@ void MainWindow::tavolsag(QVector<QVector<double>>& maszk,int fogyasztoX,int fog
         for(int j=0;j<maszk[i].size();j++)
         {
             maszk[i][j]=tavolsag_alt(i,j,fogyasztoX,fogyasztoY);
-            qDebug()<<maszk[i][j]<<' ';
+            //qDebug()<<maszk[i][j]<<' ';
         }
-        qDebug()<<' ';
+        //qDebug()<<' ';
     }
 }
 double MainWindow::tavolsag_alt(double x1,double y1,double x2, double y2)
