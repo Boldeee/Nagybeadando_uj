@@ -32,10 +32,10 @@ void MainWindow::Upload()
         line = stream.readLine();
         howmany = line.toInt();
         //qDebug() << howmany;
+        int fogyasztoszam=0;
         QVector<Informacio> Infotmp;
         for(int i = 0; i < howmany; i++)
         {
-           int fogyasztoszam=0;
             //qDebug() << "Beléptem";
            line = stream.readLine();
            linesplit = line.split(QLatin1Char(','), Qt::SkipEmptyParts);
