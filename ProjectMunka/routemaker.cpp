@@ -5,17 +5,17 @@
 
 RouteMaker::RouteMaker(int XX, int YY)
 {
-start.x = 0; start.y = 0;
-end.x = XX-1; end.y = YY-1;
+//start.x = 0; start.y = 0;
+//end.x = XX-1; end.y = YY-1;
 field = QVector<QVector<int>>(YY , QVector<int>(XX, 0));
 }
 
-void RouteMaker::setStart(const Informacio &newStart)
+void RouteMaker::setStart(const Coord &newStart)
 {
     start = newStart;
 }
 
-void RouteMaker::setEnd(const Informacio &newEnd)
+void RouteMaker::setEnd(const Coord &newEnd)
 {
     end = newEnd;
 }
@@ -41,7 +41,7 @@ struct State{
         y = _y;
         distance = _distance;
     }
-    void sethvalue(Informacio end)
+    void sethvalue(Coord end)
     {
         hvalue=abs(end.x-x)+abs(end.y-y);
         //BOLDI KÓDJA kipotolja majd

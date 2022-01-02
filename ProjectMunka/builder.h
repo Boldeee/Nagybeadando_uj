@@ -13,16 +13,16 @@ public:
     explicit Builder(int x, int y, int _size);
     enum Function {
         //base, producer, consumer, conveyor,
-        base,  conveyor, consumer,  Producer_Red /*wall volt*/, Prodcuer_Green /*selected volt*/,  Producer_Blue /*origin volt*/,
+        base,  conveyor, Consumer,  Producer_Red /*wall volt*/, Producer_Green /*selected volt*/,  Producer_Blue /*origin volt*/, way, selected,
     };
     void setFunction(Function f);
     Function getFunction() const;
     int getX() const;
     int getY() const;
 
-signals:
+/*signals:
     void clicked(int x, int y, Qt::MouseButton m);
-    void hovered(int x, int y);
+    void hovered(int x, int y);*/
 
 protected:
     //void mousePressEvent(QMouseEvent* event);

@@ -59,8 +59,10 @@ public:
     QVector<matrix> maszkok;
     int XX,YY;
     bool animation; //Lehet kelleni fog
-    RouteMaker BrumBrum(int XX,int YY);
 
+
+    RouteMaker BrumBrum(int XX,int YY);
+    RouteMaker murBmurB;
 public slots:
     void setupField(int XX, int YY);
     void setField(const QVector<QVector<Informacio>> &newField);
@@ -68,22 +70,42 @@ public slots:
     void tavolsag(QVector<QVector<double>>& maszk,int fogyasztoX,int fogyasztoY);
     double tavolsag_alt(double x1,double y1,double x2, double y2);
 
-private:
+private slots:
+    void on_showWayButton_clicked();
 
+    void on_animationButton_clicked();
+
+private:
+    Ui::MainWindow *ui;
     const QVector<QVector<Informacio> > &getField() const;
     const QVector<Informacio> &getInfo() const;
 
-    Ui::MainWindow *ui;
+
     void Upload();
     void Generate_Field(int x, int y);
     void placement();
+    //Coord start;
+    //Coord end;
 
-    int inspected_Producer;
-    int inspected_Consumer;
+    Coord inspected_Producer;
+    Coord inspected_Consumer;
 
     QVector<QVector<Informacio>> Field;
     QVector<Informacio> Info;
     QVector<Builder*> buildvector;
     QVector<Builder*> selectvector; //Lehet szemet
+    void delay(int mSec);
+
+   Builder* fieldAt(int x, int y);
+   void Painter(QVector<Informacio> Fogyaszto, QVector<Informacio> Termelok);
+   void setSelected(int x, int y, Builder::Function f = Builder::selected);
+   /*
+   void setFinal(int x, int y);
+   void setWall(int x, int y);
+   void setBase(int x, int y);
+
+   void revertField(int x, int y);
+   void revertSelected();
+*/
 };
 #endif // MAINWINDOW_H

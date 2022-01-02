@@ -1,16 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "builder.h"
-#include <QTime> //dunno
-#include <QKeyEvent> //dunno2.0
+#include <QTime>
+#include <QKeyEvent> //dunno
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow), murBmurB(0, 0)
 {
     ui->setupUi(this);
     Upload();
     placement();
     setupField(XX , YY);
+    Painter(fogyasztok, termelok);
 }
 
 MainWindow::~MainWindow()
@@ -56,6 +56,92 @@ void MainWindow::setupField(int XX, int YY)
     mousePressed = false; Ez szerintem nem kell*/
 }
 
+
+
+void MainWindow::delay(int mSec)
+{
+    QTime dieTime= QTime::currentTime().addMSecs(mSec);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
+Builder* MainWindow::fieldAt(int x, int y)
+{
+    return buildvector[x*YY + y];
+}
+
+void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termelok)// ide majd küldeni kell az adatot
+{
+    Coord check;
+    for(int i=0; i<Fogyaszto.size(); i++)
+    {
+        fieldAt(Fogyaszto[i].x, Fogyaszto[i].y)->setFunction(Builder::Consumer);
+        check.x = Fogyaszto[i].x; check.y = Fogyaszto[i].y;
+    }
+    for(int i=0; i<Termelok.size(); i++)
+    {
+     Coord tmp;
+     tmp.x = Termelok[i].x;
+     tmp.y = Termelok[i].y;
+     if(Termelok[i].r == 1)fieldAt(Termelok[i].x, Termelok[i].y)->setFunction(Builder::Producer_Red);
+     if(Termelok[i].g == 1)fieldAt(Termelok[i].x, Termelok[i].y)->setFunction(Builder::Producer_Green);
+     if(Termelok[i].b == 1)fieldAt(Termelok[i].x, Termelok[i].y)->setFunction(Builder::Producer_Blue);
+    }
+}
+
+void MainWindow::on_showWayButton_clicked()
+{
+    //Itt nem tudja meg mi kozott keressen utat
+    QVector<Coord> way;
+    QVector<Coord> discoveredField;
+    murBmurB.getPath(way, discoveredField);
+    ui->fieldNumLabel->setText(QString::number(discoveredField.size()));
+    ui->shortWayLabel->setText(QString::number(way.size()));
+
+    for (Coord c: way) {
+        setSelected(c.x, c.y, Builder::way);
+    }
+}
+
+void MainWindow::on_animationButton_clicked()
+{
+    QVector<Coord> way;
+    QVector<Coord> discoveredField;
+    murBmurB.getPath(way, discoveredField);
+    animation = true;
+    int discovered = 0;
+
+
+    for (Coord c: discoveredField) {
+        delay(50);
+        setSelected(c.x, c.y,Builder::selected);
+        discovered++;
+        ui->fieldNumLabel->setText(QString::number(discovered));
+    }
+
+
+    int wayLength = 0;
+
+    for (Coord c: way) {
+        delay(100);
+        setSelected(c.x, c.y,Builder::way);
+        wayLength++;
+        ui->shortWayLabel->setText(QString::number(wayLength));
+    }
+
+    animation = false;
+
+}
+
+void MainWindow::setSelected(int x, int y, Builder::Function f)
+{
+   /*if (!(x == final.x && y == final.y) &&
+        !(x == origin.x && y == origin.y) &&
+        validField(x,y)) {*/ //Lehet kelleni fog, mert ez egy elég masszív check
+      fieldAt(x,y)->setFunction(f);
+      selectvector.push_back(fieldAt(x,y));
+    /*}*/
+}
 
 
 void MainWindow::Upload()

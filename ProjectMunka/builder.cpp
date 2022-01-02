@@ -24,11 +24,17 @@ void Builder::drawPicture()
     case Producer_Red:
         basicImage.fill(Qt::red);
         break;
-    case Prodcuer_Green:
+    case Producer_Green:
         basicImage.fill(Qt::green);
         break;
-    case consumer:
+    case Consumer:
         basicImage.fill(Qt::black);
+        break;
+    case way:
+        basicImage.fill(Qt::darkMagenta);
+        break;
+    case selected:
+        basicImage.fill((Qt::gray));
         break;
     }
     setPixmap(basicImage.scaled(size,size));
