@@ -25,8 +25,8 @@ signals:
     void hovered(int x, int y);
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
-    void enterEvent(QEvent *event);
+    //void mousePressEvent(QMouseEvent* event);
+    //void enterEvent(QEvent *event);
     void drawPicture();
     int id_x;
     int id_y;

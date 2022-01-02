@@ -4,26 +4,20 @@
 
 
 RouteMaker::RouteMaker(int XX, int YY)
-
 {
 start.x = 0; start.y = 0;
 end.x = XX-1; end.y = YY-1;
 field = QVector<QVector<int>>(YY , QVector<int>(XX, 0));
 }
 
-void RouteMaker::setStart(const MainWindow::Informacio &newStart)
+void RouteMaker::setStart(const Informacio &newStart)
 {
     start = newStart;
 }
 
-void RouteMaker::setEnd(const MainWindow::Informacio &newEnd)
+void RouteMaker::setEnd(const Informacio &newEnd)
 {
     end = newEnd;
-}
-
-const MainWindow::Informacio &RouteMaker::getEnd() const
-{
-    return end;
 }
 
 struct path{  //!!!!!!!!!!!!!!!!!!!
@@ -47,33 +41,22 @@ struct State{
         y = _y;
         distance = _distance;
     }
-    void sethvalue(MainWindow::Informacio end)
+    void sethvalue(Informacio end)
     {
         hvalue=abs(end.x-x)+abs(end.y-y);
         //BOLDI KÓDJA kipotolja majd
     }
 };
-struct Coord {
-    int x; int y;
 
-       Coord(int _x, int _y) {
-        x = _x;
-        y = _y;
-    }
-        Coord() {
-        x = 0;
-        y = 0;
-    }
-};
-
-bool operator<( State const &s1,State const &s2)
+bool operator<(State const &s1,State const &s2)
 {
     return s1.distance+s1.hvalue>s2.distance+s2.hvalue;
-    }
-void RouteMaker::getPath(QVector<MainWindow::Informacio> &shortestPath, QVector<MainWindow::Informacio> &discoveredFields)
+}
+
+void RouteMaker::getPath(QVector<Coord> &shortestPath, QVector<Coord> &discoveredFields)
     {
-     int XX =  field[0].size();
-     int YY =  field.size();
+     XX =  field[0].size();
+     YY =  field.size();
 
      QVector<QVector<path>>convbelt(YY, QVector<path>(XX));
      convbelt[start.x][start.y] = path(start.x, start.y , 0);
@@ -84,7 +67,7 @@ void RouteMaker::getPath(QVector<MainWindow::Informacio> &shortestPath, QVector<
      {
          State actualstate =stateQueue.top();
          stateQueue.pop();
-         discoveredFields.push_back(MainWindow::Informacio(actualstate.x,actualstate.y));
+         discoveredFields.push_back(Coord(actualstate.x,actualstate.y));
          for(int i=1;i<=1;i++)
          {
              for(int j=-1; j<=1; j++)
@@ -109,7 +92,7 @@ void RouteMaker::getPath(QVector<MainWindow::Informacio> &shortestPath, QVector<
      path it=convbelt[end.x][end.y];
      while(it.x!=start.x||it.y!=start.x)
      {
-         shortestPath.push_back(Informacio(it.x,it.y));
+         shortestPath.push_back(Coord(it.x,it.y));
          it=convbelt[it.x][it.y];
      }
     }

@@ -10,7 +10,7 @@
 #include <QTextStream>
 #include <cmath>
 #include <iostream>
-#include <QSet>
+//#include <QSet>
 #include <cmath>
 #include <list>
 #include <queue>
@@ -59,6 +59,7 @@ public:
     QVector<matrix> maszkok;
     int XX,YY;
     bool animation; //Lehet kelleni fog
+    RouteMaker BrumBrum(int XX,int YY);
 
 public slots:
     void setupField(int XX, int YY);
@@ -77,7 +78,6 @@ private:
     void Generate_Field(int x, int y);
     void placement();
 
-    RouteMaker BrumBrum;
     int inspected_Producer;
     int inspected_Consumer;
 

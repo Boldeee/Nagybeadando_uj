@@ -47,9 +47,8 @@ void MainWindow::setupField(int XX, int YY)
         }
     }
     //LENYEGES RESZ SAFOI(ASDUFOUASDKUHGIUSDHUFGOUILDSAHG
-    BrumBrum = RouteMaker(XX, YY);
-    BrumBrum.setStart(inspected_Producer);
-    BrumBrum.setEnd(inspected_Consumer); //Ide kene majd a mindenseg is, vagy lehet skippelni idk
+    ///BrumBrum.setStart(inspected_Producer);
+    ///BrumBrum.setEnd(inspected_Consumer); //Ide kene majd a mindenseg is, vagy lehet skippelni idk
     /*setOrigin(0,0);
     setFinal(x-1, y-1);
     shiftPressed = false;
