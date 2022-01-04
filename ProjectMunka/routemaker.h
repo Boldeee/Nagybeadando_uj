@@ -29,21 +29,18 @@ class RouteMaker
 
 public:
     RouteMaker(int XX, int YY);
-    RouteMaker murBmurB();
-   /* PathFinder(int x_size, int y_size);
-
-    void setValue(int x, int y, int val);
-    int getValue(int x, int y);
+   /* PathFinder(int x_size, int y_size); 
     void setOrigin(Coordinate _origin);
     void setFinal(Coordinate _final);
     void getPath(vector<Coordinate> &shortestPath,
-                 vector<Coordinate> &discoveredFields);*/
-
+                 vector<Coordinate> &discoveredFields);
+    void setValue(int x, int y, int val);
+    int getValue(int x, int y);*/
     void setStart(const Coord &newStart);
     void setEnd(const Coord &newEnd);
     void getPath(QVector<Coord> &shortestPath,
                  QVector<Coord> &discoveredFields);
-    const Coord &getEnd() const;
+
 };
 
 #endif // ROUTEMAKER_H

@@ -1,14 +1,15 @@
 #include "routemaker.h"
 #include <queue>
 #include <cmath>
+#include <QDebug>
 
-
-RouteMaker::RouteMaker(int XX, int YY)
+RouteMaker::RouteMaker(int XX, int YY):
+    start(5, 2), end(3 , 4)
 {
-//start.x = 0; start.y = 0;
-//end.x = XX-1; end.y = YY-1;
 field = QVector<QVector<int>>(YY , QVector<int>(XX, 0));
 }
+
+
 
 void RouteMaker::setStart(const Coord &newStart)
 {
@@ -21,16 +22,16 @@ void RouteMaker::setEnd(const Coord &newEnd)
 }
 
 struct path{  //!!!!!!!!!!!!!!!!!!!
-  int x, y , dis;
+  int px, py , pdis;
   path()
   {
-      x = 0, y = 0, dis=INT_MAX;
+      px = 0, py = 0, pdis=INT_MAX;
   }
-  path(int _x, int _y, int _dis)
+  path(int _px, int _py, int _pdis)
   {
-   x = _x;
-   y = _y;
-   dis = _dis;
+   px = _px;
+   py = _py;
+   pdis = _pdis;
   }
 };
 struct State{
@@ -44,7 +45,7 @@ struct State{
     void sethvalue(Coord end)
     {
         hvalue=abs(end.x-x)+abs(end.y-y);
-        //BOLDI KÓDJA kipotolja majd
+
     }
 };
 
@@ -60,40 +61,46 @@ void RouteMaker::getPath(QVector<Coord> &shortestPath, QVector<Coord> &discovere
 
      QVector<QVector<path>>convbelt(YY, QVector<path>(XX));
      convbelt[start.x][start.y] = path(start.x, start.y , 0);
+
      std::priority_queue<State> stateQueue;
      State initState(start.x, start.y ,0);
      stateQueue.push(initState);
+
      while(stateQueue.size()>0)
      {
          State actualstate =stateQueue.top();
          stateQueue.pop();
          discoveredFields.push_back(Coord(actualstate.x,actualstate.y));
+
          for(int i=1;i<=1;i++)
          {
              for(int j=-1; j<=1; j++)
+             {
                  if(i==0||j==0)
                  {
                      int newX=actualstate.x+i;
                      int newY=actualstate.y+j;
-                     if(newX>=0 &&newY>=0 &&newX<XX &&newY<YY  &&field[newX][newY]==0 &&convbelt[newX][newY].dis>actualstate.distance+1)
+                     if(newX>=0 &&newY>=0 &&newX<XX &&newY<YY  &&field[newX][newY]==0 &&convbelt[newX][newY].pdis>actualstate.distance+1)
                          {
                          State newstate(newX,newY,actualstate.distance+1);
-                         //newstate.sethvalue(end);!!!!!!!!!
+                         newstate.sethvalue(end);
                          convbelt[newX][newY] = path(actualstate.x,actualstate.y,newstate.distance);
                          stateQueue.push(newstate);
                          }
                  }
          }
-         if(convbelt[end.x][end.y].dis<INT_MAX)
+     }
+     if(convbelt[end.x][end.y].pdis<INT_MAX)
          {
-         break;
+            break;
          }
      }
      path it=convbelt[end.x][end.y];
-     while(it.x!=start.x||it.y!=start.x)
+     while(it.px!=start.x||it.py!=start.x)
      {
-         shortestPath.push_back(Coord(it.x,it.y));
-         it=convbelt[it.x][it.y];
+         qDebug() << "Valami";
+         shortestPath.push_back(Coord(it.px,it.py));
+         it=convbelt[it.px][it.py];
      }
     }
 

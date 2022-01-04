@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     placement();
     setupField(XX , YY);
     Painter(fogyasztok, termelok);
+    CalculateRoutes(fogyasztok,termelok,maszkok);
 }
 
 MainWindow::~MainWindow()
@@ -46,14 +47,6 @@ void MainWindow::setupField(int XX, int YY)
             //Sztem nem kell
         }
     }
-    //LENYEGES RESZ SAFOI(ASDUFOUASDKUHGIUSDHUFGOUILDSAHG
-    ///BrumBrum.setStart(inspected_Producer);
-    ///BrumBrum.setEnd(inspected_Consumer); //Ide kene majd a mindenseg is, vagy lehet skippelni idk
-    /*setOrigin(0,0);
-    setFinal(x-1, y-1);
-    shiftPressed = false;
-    ctrlPressed = false;
-    mousePressed = false; Ez szerintem nem kell*/
 }
 
 
@@ -70,7 +63,7 @@ Builder* MainWindow::fieldAt(int x, int y)
     return buildvector[x*YY + y];
 }
 
-void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termelok)// ide majd küldeni kell az adatot
+void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termelok)// Rápingálja a térképre a termelő/fogyasztokat
 {
     Coord check;
     for(int i=0; i<Fogyaszto.size(); i++)
@@ -282,6 +275,68 @@ double MainWindow::tavolsag_alt(double x1,double y1,double x2, double y2)
     eredmeny=sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
     return eredmeny;
 }
+
+void MainWindow::CalculateRoutes(QVector<Informacio> Fogyaszto, QVector<Informacio> Termelo, QVector<matrix> maszkok)
+{
+    //qDebug() << "Eddig oke";
+    for (int i = 1; i < Fogyaszto.size(); ++i) { //1 rol kell mennie for some reason
+        Coord closestR;
+        double closest_R = 1000;
+        Coord closestG;
+        double closest_G = 1000;
+        Coord closestB;
+        double closest_B = 1000;
+        Coord consumer;
+        consumer.x = Fogyaszto[i].x; consumer.y = Fogyaszto[i].y;
+        for (int j=0;i < Termelo.size() ;j++ ) {
+            if(Termelo[j].r == 1) // Ez vagy a kovi szar
+            {
+                if(maszkok[i][Termelo[j].x][Termelo[j].y] < closest_R )
+                {
+                closest_R = maszkok[i][Termelo[j].x][Termelo[j].y];
+                closestR.x = Termelo[j].x; closestR.y =Termelo[j].y;
+                //Ezt valahogy kikene zarni ezutan
+                }
+            }       else if (Termelo[j].g == 1){
+                    if(maszkok[i][Termelo[j].x][Termelo[j].y] < closest_G )
+                    {
+                    closest_G = maszkok[i][Termelo[j].x][Termelo[j].y];
+                    closestG.x = Termelo[j].x; closestG.y =Termelo[j].y;
+                    //Ezt valahogy kikene zarni ezutan
+                    }
+            }           else if (Termelo[j].b == 1){
+                        if(maszkok[i][Termelo[j].x][Termelo[j].y]<closest_B )
+                        {
+                        closest_B = maszkok[i][Termelo[j].x][Termelo[j].y];
+                        closestB.x = Termelo[j].x; closestB.y =Termelo[j].y;
+                        //Ezt valahogy kikene zarni ezutan
+                        }
+    }
+}
+//R
+       Convbelts["r"] = CalculateRoutes_alt(closestR , consumer);
+//G
+       Convbelts["g"] = CalculateRoutes_alt(closestG , consumer);
+//B
+       Convbelts["b"] = CalculateRoutes_alt(closestG , consumer);
+}
+
+}
+
+QVector<Coord> MainWindow::CalculateRoutes_alt(Coord inspected_Producer, Coord inspected_Consumer)
+{
+    RouteMaker(XX, YY);
+    murBmurB.setStart(inspected_Producer);
+    murBmurB.setEnd(inspected_Consumer);
+    QVector<Coord> way;
+    QVector<Coord> discoveredField;
+    murBmurB.getPath(way, discoveredField);
+    for (Coord c: way) {
+        setSelected(c.x, c.y, Builder::way);
+    }
+    return way;
+}
+
 const QVector<MainWindow::Informacio> &MainWindow::getInfo() const
 {
     return Info;

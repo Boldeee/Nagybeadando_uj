@@ -14,6 +14,7 @@
 #include <cmath>
 #include <list>
 #include <queue>
+#include <QVariant>
 #include "builder.h"
 #include "routemaker.h"
 
@@ -57,6 +58,7 @@ public:
     QVector<Informacio> termelok;
     QVector<Informacio> fogyasztok;
     QVector<matrix> maszkok;
+    QMap < QString, QVector<Coord>> Convbelts;
     int XX,YY;
     bool animation; //Lehet kelleni fog
 
@@ -69,7 +71,8 @@ public slots:
     void setInfo(const QVector<Informacio> &newInfo);
     void tavolsag(QVector<QVector<double>>& maszk,int fogyasztoX,int fogyasztoY);
     double tavolsag_alt(double x1,double y1,double x2, double y2);
-
+    void CalculateRoutes(QVector<Informacio> Fogyaszto, QVector<Informacio> Termelo, QVector<matrix> maszkok);
+    QVector<Coord> CalculateRoutes_alt(Coord inspected_Producer, Coord inspected_Consumer);
 private slots:
     void on_showWayButton_clicked();
 
