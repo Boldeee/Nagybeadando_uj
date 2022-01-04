@@ -3,12 +3,14 @@
 #include <QTime>
 #include <QKeyEvent> //dunno
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow), murBmurB(0, 0)
+    : QMainWindow(parent),
+      murBmurB(0,0),
+      ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     Upload();
     placement();
+    murBmurB={XX,YY};
     setupField(XX , YY);
     Painter(fogyasztok, termelok);
     CalculateRoutes(fogyasztok,termelok,maszkok);
@@ -215,16 +217,7 @@ void MainWindow::Generate_Field(int x, int y)
 {
     //qDebug() << "Beléptem a Generate Fieldbe";
     QVector<QVector<Informacio>> Fieldtmp(x,QVector<Informacio>(y));
-    /*//QVector<Informacio> tempo;
-    for (int i = 0; i < x ;i++ ) {
-       // qDebug() << "Beléptem a Generate Fieldbe ebbe a részébe is";
-        for (int j = 0; j < y ;j++ ) {
-            //qDebug() << ((i+1)*10+(j+1));
-            //Fieldtmp[i]=tempo;
-            //qDebug()<<Fieldtmp[i][(i+1)*10+(j+1)];
-        }
 
-    }*/
     setField(Fieldtmp);
 }
 void MainWindow::placement()
@@ -276,10 +269,11 @@ double MainWindow::tavolsag_alt(double x1,double y1,double x2, double y2)
     return eredmeny;
 }
 
-void MainWindow::CalculateRoutes(QVector<Informacio> Fogyaszto, QVector<Informacio> Termelo, QVector<matrix> maszkok)
+void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<Informacio>& Termelo, const QVector<matrix>& maszkok)
 {
     //qDebug() << "Eddig oke";
-    for (int i = 1; i < Fogyaszto.size(); ++i) { //1 rol kell mennie for some reason
+    int melyiktermelorolvanszoR=-1,melyiktermelorolvanszoG=-1,melyiktermelorolvanszoB=-1;
+    for (int i = 0; i < Fogyaszto.size(); ++i) { //1 rol kell mennie for some reason
         Coord closestR;
         double closest_R = 1000;
         Coord closestG;
@@ -288,13 +282,14 @@ void MainWindow::CalculateRoutes(QVector<Informacio> Fogyaszto, QVector<Informac
         double closest_B = 1000;
         Coord consumer;
         consumer.x = Fogyaszto[i].x; consumer.y = Fogyaszto[i].y;
-        for (int j=0;i < Termelo.size() ;j++ ) {
+        for (int j=0;j < Termelo.size() ;j++ ) {
             if(Termelo[j].r == 1) // Ez vagy a kovi szar
             {
                 if(maszkok[i][Termelo[j].x][Termelo[j].y] < closest_R )
                 {
                 closest_R = maszkok[i][Termelo[j].x][Termelo[j].y];
                 closestR.x = Termelo[j].x; closestR.y =Termelo[j].y;
+                melyiktermelorolvanszoR=j;
                 //Ezt valahogy kikene zarni ezutan
                 }
             }       else if (Termelo[j].g == 1){
@@ -302,6 +297,7 @@ void MainWindow::CalculateRoutes(QVector<Informacio> Fogyaszto, QVector<Informac
                     {
                     closest_G = maszkok[i][Termelo[j].x][Termelo[j].y];
                     closestG.x = Termelo[j].x; closestG.y =Termelo[j].y;
+                    melyiktermelorolvanszoG=j;
                     //Ezt valahogy kikene zarni ezutan
                     }
             }           else if (Termelo[j].b == 1){
@@ -309,29 +305,34 @@ void MainWindow::CalculateRoutes(QVector<Informacio> Fogyaszto, QVector<Informac
                         {
                         closest_B = maszkok[i][Termelo[j].x][Termelo[j].y];
                         closestB.x = Termelo[j].x; closestB.y =Termelo[j].y;
+                        melyiktermelorolvanszoB=j;
                         //Ezt valahogy kikene zarni ezutan
                         }
     }
 }
+        Termelo[melyiktermelorolvanszoR].felhasznaltuk_e=true;
+        Termelo[melyiktermelorolvanszoG].felhasznaltuk_e=true;
+        Termelo[melyiktermelorolvanszoB].felhasznaltuk_e=true;
 //R
        Convbelts["r"] = CalculateRoutes_alt(closestR , consumer);
 //G
-       Convbelts["g"] = CalculateRoutes_alt(closestG , consumer);
+       //Convbelts["g"] = CalculateRoutes_alt(closestG , consumer);
 //B
-       Convbelts["b"] = CalculateRoutes_alt(closestG , consumer);
+       //Convbelts["b"] = CalculateRoutes_alt(closestB , consumer);
 }
 
 }
 
-QVector<Coord> MainWindow::CalculateRoutes_alt(Coord inspected_Producer, Coord inspected_Consumer)
+QVector<Coord> MainWindow::CalculateRoutes_alt(const Coord& inspected_Producer,const Coord& inspected_Consumer)
 {
-    RouteMaker(XX, YY);
     murBmurB.setStart(inspected_Producer);
+    qDebug()<<inspected_Producer.x<<inspected_Producer.y;
     murBmurB.setEnd(inspected_Consumer);
     QVector<Coord> way;
     QVector<Coord> discoveredField;
     murBmurB.getPath(way, discoveredField);
     for (Coord c: way) {
+        qDebug()<<c.x<<c.y;
         setSelected(c.x, c.y, Builder::way);
     }
     return way;
