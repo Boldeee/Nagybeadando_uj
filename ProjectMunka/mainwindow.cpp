@@ -273,7 +273,7 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
 {
     //qDebug() << "Eddig oke";
     int melyiktermelorolvanszoR=-1,melyiktermelorolvanszoG=-1,melyiktermelorolvanszoB=-1;
-    for (int i = 0; i < Fogyaszto.size(); ++i) { //1 rol kell mennie for some reason
+    for (int i = 0; i < Fogyaszto.size(); ++i) {
         Coord closestR;
         double closest_R = 1000;
         Coord closestG;
@@ -316,9 +316,9 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
 //R
        Convbelts["r"] = CalculateRoutes_alt(closestR , consumer);
 //G
-       //Convbelts["g"] = CalculateRoutes_alt(closestG , consumer);
+       Convbelts["g"] = CalculateRoutes_alt(closestG , consumer);
 //B
-       //Convbelts["b"] = CalculateRoutes_alt(closestB , consumer);
+       Convbelts["b"] = CalculateRoutes_alt(closestB , consumer);
 }
 
 }
