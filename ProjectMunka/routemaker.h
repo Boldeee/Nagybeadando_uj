@@ -24,6 +24,7 @@ class RouteMaker
     Coord end;
 
 public:
+
     RouteMaker(int xmeret,int ymeret);
     /*{
     field= QVector<QVector<int>>(ymeret , QVector<int>(xmeret, 0));
@@ -34,6 +35,7 @@ public:
     int XX,YY;
 
     void setStart(const Coord &newStart);
+    void setFieldmezo(int x, int y);
     void setEnd(const Coord &newEnd);
     void getPath(QVector<Coord> &shortestPath,
                  QVector<Coord> &discoveredFields);
@@ -46,6 +48,7 @@ public:
                  vector<Coordinate> &discoveredFields);
     void setValue(int x, int y, int val);
     int getValue(int x, int y);*/
+    const QVector<QVector<int> > &getField() const;
 };
 
 #endif // ROUTEMAKER_H

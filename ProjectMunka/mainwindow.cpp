@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupField(XX , YY);
     Painter(fogyasztok, termelok);
     CalculateRoutes(fogyasztok,termelok,maszkok);
+    mozgatosdi();
 }
 
 MainWindow::~MainWindow()
@@ -132,7 +133,8 @@ void MainWindow::setSelected(int x, int y, Builder::Function f)
 {
    /*if (!(x == final.x && y == final.y) &&
         !(x == origin.x && y == origin.y) &&
-        validField(x,y)) {*/ //Lehet kelleni fog, mert ez egy elég masszív check
+        validField(x,y)) {*/
+        //Lehet kelleni fog, mert ez egy elég masszív check
       fieldAt(x,y)->setFunction(f);
       selectvector.push_back(fieldAt(x,y));
     /*}*/
@@ -314,11 +316,11 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
         Termelo[melyiktermelorolvanszoG].felhasznaltuk_e=true;
         Termelo[melyiktermelorolvanszoB].felhasznaltuk_e=true;
 //R
-       Convbelts["r"] = CalculateRoutes_alt(closestR , consumer);
+       Convbelts["r"+QString::number(termelok[melyiktermelorolvanszoR].freq)] = CalculateRoutes_alt(closestR , consumer);
 //G
-       Convbelts["g"] = CalculateRoutes_alt(closestG , consumer);
+       Convbelts["g"+QString::number(termelok[melyiktermelorolvanszoG].freq)] = CalculateRoutes_alt(closestG , consumer);
 //B
-       Convbelts["b"] = CalculateRoutes_alt(closestB , consumer);
+       Convbelts["b"+QString::number(termelok[melyiktermelorolvanszoB].freq)] = CalculateRoutes_alt(closestB , consumer);
 }
 
 }
@@ -326,18 +328,57 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
 QVector<Coord> MainWindow::CalculateRoutes_alt(const Coord& inspected_Producer,const Coord& inspected_Consumer)
 {
     murBmurB.setStart(inspected_Producer);
-    qDebug()<<inspected_Producer.x<<inspected_Producer.y;
+    //qDebug()<<inspected_Producer.x<<inspected_Producer.y;
     murBmurB.setEnd(inspected_Consumer);
     QVector<Coord> way;
     QVector<Coord> discoveredField;
     murBmurB.getPath(way, discoveredField);
     for (Coord c: way) {
-        qDebug()<<c.x<<c.y;
         setSelected(c.x, c.y, Builder::way);
+        murBmurB.setFieldmezo(c.x,c.y);
     }
     return way;
 }
+void MainWindow::mozgatosdi()
+{
+    int lepteto=0;
+    Coord prev(-1,-1);
+    while(true)
+    for(int i=0;i<leghosszabbkereses(Convbelts);i++)
+    {
+    lepteto++;
+        for(QMap <QString, QVector<Coord>>::iterator it=Convbelts.begin();it!=Convbelts.end();it++)
+        {
 
+            qDebug()<<it.key();
+
+                /*for(int timer=0;timer<it.key().back().digitValue();timer++){
+                delay(50);
+                }*/
+                int f=Convbelts[it.key()].size()-1;
+                qDebug()<<Convbelts[it.key()][std::min(i,f)].x<<Convbelts[it.key()][std::min(i,f)].y;
+
+
+        }
+        /*if(prev.x!=-1&&prev.y!=-1)
+        {
+
+        }*/
+
+    }
+}
+int MainWindow::leghosszabbkereses(QMap <QString, QVector<Coord>>& keresett)
+{
+    int leghosszabb=0;
+    for(QMap <QString, QVector<Coord>>::iterator it=keresett.begin();it!=keresett.end();it++)
+    {
+        if(keresett[it.key()].size()>leghosszabb)
+        {
+            leghosszabb=keresett[it.key()].size();
+        }
+    }
+    return leghosszabb;
+}
 const QVector<MainWindow::Informacio> &MainWindow::getInfo() const
 {
     return Info;

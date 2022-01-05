@@ -392,7 +392,7 @@ debug/moc_mainwindow.cpp: ../ProjectMunka/mainwindow.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvector.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QStringList \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QTextStream \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QSet \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QVariant \
 		../ProjectMunka/builder.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QWidget \
 		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QLabel \
@@ -401,7 +401,6 @@ debug/moc_mainwindow.cpp: ../ProjectMunka/mainwindow.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtGui/qpicture.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtGui/qtextdocument.h \
 		../ProjectMunka/routemaker.h \
-		../ProjectMunka/mainwindow.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.1.3/mingw81_64/bin/moc.exe
 	C:\Qt\6.1.3\mingw81_64\bin\moc.exe $(DEFINES) --include "D:/QT Projects/Nagybeadando/Nagybeadando_uj/build-ProjectMunka-Desktop_Qt_6_1_3_MinGW_64_bit-Debug/debug/moc_predefs.h" -IC:/Qt/6.1.3/mingw81_64/mkspecs/win32-g++ -I"D:/QT Projects/Nagybeadando/Nagybeadando_uj/ProjectMunka" -IC:/Qt/6.1.3/mingw81_64/include -IC:/Qt/6.1.3/mingw81_64/include/QtWidgets -IC:/Qt/6.1.3/mingw81_64/include/QtGui -IC:/Qt/6.1.3/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\ProjectMunka\mainwindow.h -o debug\moc_mainwindow.cpp
@@ -701,7 +700,7 @@ debug/main.o: ../ProjectMunka/main.cpp ../ProjectMunka/mainwindow.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvector.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QStringList \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QTextStream \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QSet \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QVariant \
 		../ProjectMunka/builder.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QWidget \
 		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QLabel \
@@ -857,7 +856,7 @@ debug/mainwindow.o: ../ProjectMunka/mainwindow.cpp ../ProjectMunka/mainwindow.h 
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvector.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QStringList \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QTextStream \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QSet \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QVariant \
 		../ProjectMunka/builder.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QWidget \
 		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QLabel \
@@ -867,32 +866,21 @@ debug/mainwindow.o: ../ProjectMunka/mainwindow.cpp ../ProjectMunka/mainwindow.h 
 		C:/Qt/6.1.3/mingw81_64/include/QtGui/qtextdocument.h \
 		../ProjectMunka/routemaker.h \
 		ui_mainwindow.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QVariant \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QApplication \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qapplication.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qeventloop.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qguiapplication.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qlocale.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QMenuBar \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qmenubar.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qmenu.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qaction.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QStatusBar \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qstatusbar.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/QTime \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qdatetime.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qlocale.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtGui/QKeyEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\ProjectMunka\mainwindow.cpp
 
 debug/routemaker.o: ../ProjectMunka/routemaker.cpp ../ProjectMunka/routemaker.h \
-		../ProjectMunka/mainwindow.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QMainWindow \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qmainwindow.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qtwidgetsglobal.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qtguiglobal.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QVector \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvector.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qlist.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qarraydatapointer.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qarraydataops.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qarraydata.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qpair.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qglobal.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qconfig-bootstrapped.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qconfig.h \
@@ -914,26 +902,15 @@ debug/routemaker.o: ../ProjectMunka/routemaker.cpp ../ProjectMunka/routemaker.h 
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qmutex.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qnumeric.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qversiontagging.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qtgui-config.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qwidget.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qwindowdefs.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qobjectdefs.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcontainertools_impl.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qnamespace.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qtmetamacros.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qobjectdefs_impl.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qwindowdefs_win.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qobject.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qhashfunctions.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qstring.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qchar.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qstringview.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qbytearray.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qrefcount.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qarraydata.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qpair.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qarraydatapointer.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qarraydataops.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcontainertools_impl.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qbytearrayalgorithms.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qbytearrayview.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qstringliteral.h \
@@ -942,98 +919,41 @@ debug/routemaker.o: ../ProjectMunka/routemaker.cpp ../ProjectMunka/routemaker.h 
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qutf8stringview.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qstringtokenizer.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qstringbuilder.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qlist.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qhashfunctions.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qiterator.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qbytearraylist.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qstringlist.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qalgorithms.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qstringmatcher.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcoreevent.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/QDebug \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qdebug.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qhash.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qmath.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qmap.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qshareddata.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qshareddata_impl.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qtextstream.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qiodevicebase.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qscopedpointer.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qstringconverter.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qset.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcontiguouscache.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qsharedpointer.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qobject.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qobjectdefs.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcoreevent.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qmetatype.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcompare.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvarlengtharray.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qdatastream.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qiodevicebase.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qiterable.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qmetacontainer.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcontainerinfo.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qtaggedpointer.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qmath.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qobject_impl.h \
 		C:/Qt/6.1.3/mingw81_64/include/QtCore/qproperty.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qshareddata.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qpropertyprivate.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qmargins.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qpaintdevice.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qrect.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qsize.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qpoint.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qpalette.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qcolor.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qrgb.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qrgba64.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qbrush.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qimage.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qpixelformat.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qtransform.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qpolygon.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qregion.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qline.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qpixmap.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qsharedpointer.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qsharedpointer_impl.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qfont.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qfontmetrics.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qfontinfo.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qsizepolicy.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qcursor.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qbitmap.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qkeysequence.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qevent.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qiodevice.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qpointer.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qurl.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvariant.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qmap.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qshareddata_impl.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qhash.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qdebug.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qtextstream.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qstringconverter.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qset.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qcontiguouscache.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qeventpoint.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qvector2d.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qvectornd.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qpointingdevice.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qinputdevice.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qscreen.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QList \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QObject \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QRect \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QSize \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QSizeF \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/QTransform \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qtabwidget.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qicon.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QMap \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QFile \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qfile.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QVector \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/qvector.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QStringList \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QTextStream \
-		C:/Qt/6.1.3/mingw81_64/include/QtCore/QSet \
-		../ProjectMunka/builder.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QWidget \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/QLabel \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qlabel.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtWidgets/qframe.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qpicture.h \
-		C:/Qt/6.1.3/mingw81_64/include/QtGui/qtextdocument.h
+		C:/Qt/6.1.3/mingw81_64/include/QtCore/qpropertyprivate.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\routemaker.o ..\ProjectMunka\routemaker.cpp
 
 debug/moc_builder.o: debug/moc_builder.cpp 

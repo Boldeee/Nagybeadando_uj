@@ -17,6 +17,7 @@
 #include <QVariant>
 #include "builder.h"
 #include "routemaker.h"
+#include <stdio.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -58,7 +59,7 @@ public:
     QVector<Informacio> termelok;
     QVector<Informacio> fogyasztok;
     QVector<matrix> maszkok;
-    QMap < QString, QVector<Coord>> Convbelts;
+    QMap <QString, QVector<Coord>> Convbelts;
     int XX,YY;
     bool animation; //Lehet kelleni fog
 
@@ -72,6 +73,8 @@ public slots:
     double tavolsag_alt(double x1,double y1,double x2, double y2);
     void CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<Informacio>& Termelo, const QVector<matrix>& maszkok);
     QVector<Coord> CalculateRoutes_alt(const Coord& inspected_Producer, const Coord& inspected_Consumer);
+    void mozgatosdi();
+    int leghosszabbkereses(QMap <QString, QVector<Coord>>& keresett);
 private slots:
     void on_showWayButton_clicked();
 
