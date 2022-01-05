@@ -72,11 +72,6 @@ public slots:
     double tavolsag_alt(double x1,double y1,double x2, double y2);
     void CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<Informacio>& Termelo, const QVector<matrix>& maszkok);
     QVector<Coord> CalculateRoutes_alt(const Coord& inspected_Producer, const Coord& inspected_Consumer);
-private slots:
-    void on_showWayButton_clicked();
-
-    void on_animationButton_clicked();
-
 private:
     Ui::MainWindow *ui;
     const QVector<QVector<Informacio> > &getField() const;

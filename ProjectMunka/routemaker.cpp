@@ -3,6 +3,11 @@
 #include <cmath>
 #include <QDebug>
 
+const QVector<QVector<int> > &RouteMaker::getField() const
+{
+    return field;
+}
+
 RouteMaker::RouteMaker(int xmeret,int ymeret):
 start(0,0),end(xmeret-1,ymeret-1)
 {

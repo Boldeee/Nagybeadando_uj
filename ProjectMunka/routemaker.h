@@ -46,6 +46,7 @@ public:
                  vector<Coordinate> &discoveredFields);
     void setValue(int x, int y, int val);
     int getValue(int x, int y);*/
+    const QVector<QVector<int> > &getField() const;
 };
 
 #endif // ROUTEMAKER_H

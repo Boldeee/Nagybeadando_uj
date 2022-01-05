@@ -33,8 +33,7 @@ void MainWindow::setupField(int XX, int YY)
     int size = std::min(500/XX, 500/YY);
 
     ui->gridLayout->setSpacing(size/10);
-    ui->widthBox->setValue(XX);
-    ui->heightBox->setValue(YY);
+    ui->groupBox->setFixedWidth(100);
 
     for(int i=0; i<XX; i++)
     {
@@ -44,9 +43,6 @@ void MainWindow::setupField(int XX, int YY)
             ui->gridLayout->addWidget(b, i ,j);
             buildvector.push_back(b);
             b->setFunction(Builder::base);
-            /*connect(f,&Field::clicked,this, &MainWindow::on_field_clicked);
-            connect(f,&Field::hovered,this, &MainWindow::on_field_hovered);*/
-            //Sztem nem kell
         }
     }
 }
@@ -72,6 +68,13 @@ void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termel
     {
         fieldAt(Fogyaszto[i].x, Fogyaszto[i].y)->setFunction(Builder::Consumer);
         check.x = Fogyaszto[i].x; check.y = Fogyaszto[i].y;
+        ui->reqR->setText(QString::number(Fogyaszto[i].need_r));
+        ui->reqG->setText(QString::number(Fogyaszto[i].need_g));
+        ui->reqB->setText(QString::number(Fogyaszto[i].need_b));
+        ui->reqRG->setText(QString::number(Fogyaszto[i].need_r_g));
+        ui->reqRB->setText(QString::number(Fogyaszto[i].need_r_b));
+        ui->reqBC->setText(QString::number(Fogyaszto[i].need_g_b));
+        ui->reqRGB->setText(QString::number(Fogyaszto[i].need_w));
     }
     for(int i=0; i<Termelok.size(); i++)
     {
@@ -82,50 +85,6 @@ void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termel
      if(Termelok[i].g == 1)fieldAt(Termelok[i].x, Termelok[i].y)->setFunction(Builder::Producer_Green);
      if(Termelok[i].b == 1)fieldAt(Termelok[i].x, Termelok[i].y)->setFunction(Builder::Producer_Blue);
     }
-}
-
-void MainWindow::on_showWayButton_clicked()
-{
-    //Itt nem tudja meg mi kozott keressen utat
-    QVector<Coord> way;
-    QVector<Coord> discoveredField;
-    murBmurB.getPath(way, discoveredField);
-    ui->fieldNumLabel->setText(QString::number(discoveredField.size()));
-    ui->shortWayLabel->setText(QString::number(way.size()));
-
-    for (Coord c: way) {
-        setSelected(c.x, c.y, Builder::way);
-    }
-}
-
-void MainWindow::on_animationButton_clicked()
-{
-    QVector<Coord> way;
-    QVector<Coord> discoveredField;
-    murBmurB.getPath(way, discoveredField);
-    animation = true;
-    int discovered = 0;
-
-
-    for (Coord c: discoveredField) {
-        delay(50);
-        setSelected(c.x, c.y,Builder::selected);
-        discovered++;
-        ui->fieldNumLabel->setText(QString::number(discovered));
-    }
-
-
-    int wayLength = 0;
-
-    for (Coord c: way) {
-        delay(100);
-        setSelected(c.x, c.y,Builder::way);
-        wayLength++;
-        ui->shortWayLabel->setText(QString::number(wayLength));
-    }
-
-    animation = false;
-
 }
 
 void MainWindow::setSelected(int x, int y, Builder::Function f)
@@ -316,7 +275,7 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
 //R
        Convbelts["r"] = CalculateRoutes_alt(closestR , consumer);
 //G
-       Convbelts["g"] = CalculateRoutes_alt(closestG , consumer);
+       //Convbelts["g"] = CalculateRoutes_alt(closestG , consumer);
 //B
        Convbelts["b"] = CalculateRoutes_alt(closestB , consumer);
 }

@@ -83,39 +83,18 @@
       <item>
        <widget class="QGroupBox" name="groupBox">
         <property name="title">
-         <string>Control</string>
+         <string>Stats</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QCheckBox" name="lineMode">
-           <property name="text">
-            <string>Box mode</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="showWayButton">
-           <property name="text">
-            <string>Show Shortest Way</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="animationButton">
-           <property name="text">
-            <string>Animate search</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>Discovered fields:</string>
+            <string>Req R</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="fieldNumLabel">
+          <widget class="QLabel" name="reqR">
            <property name="text">
             <string>-</string>
            </property>
@@ -127,68 +106,84 @@
          <item>
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>Shortest way:</string>
+            <string>Req G</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="shortWayLabel">
+          <widget class="QLabel" name="reqG">
            <property name="text">
             <string>-</string>
            </property>
           </widget>
          </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="title">
-         <string>Setting</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <layout class="QFormLayout" name="formLayout">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Width</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="widthBox">
-             <property name="minimum">
-              <number>5</number>
-             </property>
-             <property name="maximum">
-              <number>50</number>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Height</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QSpinBox" name="heightBox">
-             <property name="minimum">
-              <number>5</number>
-             </property>
-             <property name="maximum">
-              <number>50</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Req B</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="resizeButton">
+          <widget class="QLabel" name="reqB">
            <property name="text">
-            <string>Resize</string>
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Req RG</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="reqRG">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>ReqRB</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="reqRB">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>ReqBC</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="reqBC">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>ReqRGB</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="reqRGB">
+           <property name="text">
+            <string>-</string>
            </property>
           </widget>
          </item>
@@ -218,7 +213,7 @@
      <x>0</x>
      <y>0</y>
      <width>861</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
