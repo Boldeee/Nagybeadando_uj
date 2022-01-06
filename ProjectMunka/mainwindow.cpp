@@ -34,8 +34,7 @@ void MainWindow::setupField(int XX, int YY)
     int size = std::min(500/XX, 500/YY);
 
     ui->gridLayout->setSpacing(size/10);
-    ui->widthBox->setValue(XX);
-    ui->heightBox->setValue(YY);
+    ui->groupBox->setFixedWidth(100);
 
     for(int i=0; i<XX; i++)
     {
@@ -45,9 +44,6 @@ void MainWindow::setupField(int XX, int YY)
             ui->gridLayout->addWidget(b, i ,j);
             buildvector.push_back(b);
             b->setFunction(Builder::base);
-            /*connect(f,&Field::clicked,this, &MainWindow::on_field_clicked);
-            connect(f,&Field::hovered,this, &MainWindow::on_field_hovered);*/
-            //Sztem nem kell
         }
     }
 }
@@ -73,6 +69,13 @@ void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termel
     {
         fieldAt(Fogyaszto[i].x, Fogyaszto[i].y)->setFunction(Builder::Consumer);
         check.x = Fogyaszto[i].x; check.y = Fogyaszto[i].y;
+        ui->reqR->setText(QString::number(Fogyaszto[i].need_r));
+        ui->reqG->setText(QString::number(Fogyaszto[i].need_g));
+        ui->reqB->setText(QString::number(Fogyaszto[i].need_b));
+        ui->reqRG->setText(QString::number(Fogyaszto[i].need_r_g));
+        ui->reqRB->setText(QString::number(Fogyaszto[i].need_r_b));
+        ui->reqBC->setText(QString::number(Fogyaszto[i].need_g_b));
+        ui->reqRGB->setText(QString::number(Fogyaszto[i].need_w));
     }
     for(int i=0; i<Termelok.size(); i++)
     {
