@@ -11,12 +11,14 @@ class Builder : public QLabel
 {
     Q_OBJECT
 public:
+    QString stats;
     explicit Builder(int x, int y, int _size);
     enum Function {
         //base, producer, consumer, conveyor,
         base,  conveyor, Consumer,  Producer_Red /*wall volt*/, Producer_Green /*selected volt*/,  Producer_Blue /*origin volt*/, way, selected,
         convR,convG,convB,convRG,convRB,convGB,convW,
-        wayR,wayG,wayB
+        wayR,wayG,wayB,
+        dobozka
     };
 
     void setFunction(Function f);

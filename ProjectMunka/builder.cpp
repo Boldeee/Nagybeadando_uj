@@ -29,7 +29,6 @@ void Builder::drawPicture()
         break;
     case Consumer:
         basicImage.fill(Qt::black);
-        break;
     case way:
         basicImage.fill(Qt::darkMagenta);
         break;

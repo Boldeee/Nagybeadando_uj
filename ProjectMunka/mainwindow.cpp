@@ -67,7 +67,8 @@ void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termel
     Coord check;
     for(int i=0; i<Fogyaszto.size(); i++)
     {
-        fieldAt(Fogyaszto[i].x, Fogyaszto[i].y)->setFunction(Builder::Consumer);
+ //       fieldAt(Fogyaszto[i].x, Fogyaszto[i].y)->setText(QString::number(Fogyaszto[i].need_r));
+        fieldAt(Fogyaszto[i].x, Fogyaszto[i].y)->setFunction(Builder::Consumer);        
         check.x = Fogyaszto[i].x; check.y = Fogyaszto[i].y;
         ui->reqR->setText(QString::number(Fogyaszto[i].need_r));
         ui->reqG->setText(QString::number(Fogyaszto[i].need_g));
@@ -88,7 +89,7 @@ void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termel
     }
 }
 
-void MainWindow::on_showWayButton_clicked()
+/*void MainWindow::on_showWayButton_clicked()
 {
     //Itt nem tudja meg mi kozott keressen utat
     QVector<Coord> way;
@@ -130,7 +131,7 @@ void MainWindow::on_animationButton_clicked()
 
     animation = false;
 
-}
+}*/
 void MainWindow::setdoboz(int x, int y, Builder::Function f)
 {
     fieldAt(x,y)->setszalagFunction(f);
@@ -345,6 +346,7 @@ void MainWindow::advance()
     spawn();
     eloreleptet();
     lepteto++;
+    refresh();
 }
 void MainWindow::spawn()
 {
@@ -368,10 +370,14 @@ void MainWindow::spawn()
        }*/
 
 }
+
+
+
 void MainWindow::eloreleptet()
 {
     for(QMap <QString, QVector<rgbszin>>::iterator it=Beltmasolat.begin();it!=Beltmasolat.end();it++)
     {
+        eattheweak(it.key());
         Beltmasolat[it.key()][Beltmasolat[it.key()].size()-1];
         for (int i=Beltmasolat[it.key()].size()-1;i>0;i--)
         {
@@ -449,6 +455,69 @@ void MainWindow::szintesztelo(QString itkey, int iterator)
     }
 }
 
+void MainWindow::eattheweak(QString itkey)
+{
+    //kene tudni a fogyasztot exactly akit vizsgalunk
+    if( maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
+        Beltmasolat[itkey][Beltmasolat[itkey].size()-1].r == 1 &&
+        Beltmasolat[itkey][Beltmasolat[itkey].size()-1].g == 1 &&
+        Beltmasolat[itkey][Beltmasolat[itkey].size()-1].b == 1 &&
+        fogyasztok[0].need_w != 0)
+    {
+        fogyasztok[0].need_w -=1;
+    }else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
+             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].r == 1 &&
+             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].g == 1 &&
+             fogyasztok[0].need_r_g != 0)
+    {
+        fogyasztok[0].need_r_g-=1;
+    }
+    else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
+            Beltmasolat[itkey][Beltmasolat[itkey].size()-1].r == 1 &&
+            Beltmasolat[itkey][Beltmasolat[itkey].size()-1].b == 1 &&
+            fogyasztok[0].need_r_b != 0)
+    {
+        fogyasztok[0].need_r_b-=1;
+    }
+    else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
+            Beltmasolat[itkey][Beltmasolat[itkey].size()-1].g == 1&&
+            Beltmasolat[itkey][Beltmasolat[itkey].size()-1].b == 1&&
+            fogyasztok[0].need_g_b != 0)
+    {
+        fogyasztok[0].need_g_b -=1;
+    }else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
+             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].r == 1&&
+             fogyasztok[0].need_r != 0)
+    {
+        fogyasztok[0].need_r -=1;
+    }else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
+             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].g == 1&&
+             fogyasztok[0].need_g != 0)
+    {
+         fogyasztok[0].need_g -=1;
+    }else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
+             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].b == 1&& fogyasztok[0].need_b != 0)
+    {
+         fogyasztok[0].need_b -=1;
+    }else
+    {
+        wedone = true;
+    }
+}
+
+void MainWindow::refresh()
+{
+    for(int i=0; i<fogyasztok.size(); i++)//Ezt fixált adattal kikell potolni
+    {
+        ui->reqR->setText(QString::number(fogyasztok[i].need_r));
+        ui->reqG->setText(QString::number(fogyasztok[i].need_g));
+        ui->reqB->setText(QString::number(fogyasztok[i].need_b));
+        ui->reqRG->setText(QString::number(fogyasztok[i].need_r_g));
+        ui->reqRB->setText(QString::number(fogyasztok[i].need_r_b));
+        ui->reqBC->setText(QString::number(fogyasztok[i].need_g_b));
+        ui->reqRGB->setText(QString::number(fogyasztok[i].need_w));
+    }
+}
 int MainWindow::leghosszabbkereses(QMap <QString, QVector<Coord>>& keresett)
 {
     int leghosszabb=0;

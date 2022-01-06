@@ -68,6 +68,7 @@ public:
     int XX,YY;
     bool animation; //Lehet kelleni fog
     int lepteto=0;
+    bool wedone = false;
 
     RouteMaker murBmurB{0,0};
     //RouteMaker BrumBrum(int XX,int YY);
@@ -85,11 +86,13 @@ public slots:
     void advance();
     void eloreleptet();
     void szintesztelo(QString itkey,int iterator);
+    void eattheweak(QString itkey);
+    void refresh();
 
 private slots:
-    void on_showWayButton_clicked();
+   // void on_showWayButton_clicked();
 
-    void on_animationButton_clicked();
+    //void on_animationButton_clicked();
 
     void on_leptetbtn_clicked();
 
