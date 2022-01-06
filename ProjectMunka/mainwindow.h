@@ -63,8 +63,8 @@ public:
     QVector<Informacio> termelok;
     QVector<Informacio> fogyasztok;
     QVector<matrix> maszkok;
-    QMap <QString, QVector<Coord>> Convbelts;
-    QMap <QString, QVector<rgbszin>> Beltmasolat;
+    QMap<int , QMap <QString, QVector<Coord>>> Convbelts;  //Fogyaszto id-> szin alapjan melyik termeleo -> neki az uta
+    QMap<int , QMap <QString, QVector<rgbszin>>> Beltmasolat;
     int XX,YY;
     bool animation; //Lehet kelleni fog
     int lepteto=0;
@@ -82,11 +82,11 @@ public slots:
     QVector<Coord> CalculateRoutes_alt(const Coord& inspected_Producer, const Coord& inspected_Consumer,const QString& szin);
     void spawn();
     int leghosszabbkereses(QMap <QString, QVector<Coord>>& keresett);
-    QMap <QString, QVector<rgbszin>> meret(QMap <QString, QVector<rgbszin>>& beltmasolat_alt);
+    QMap <int ,QMap <QString, QVector<rgbszin>>> meret(QMap <int, QMap <QString, QVector<rgbszin>>>& beltmasolat_alt);
     void advance();
     void eloreleptet();
-    void szintesztelo(QString itkey,int iterator);
-    void eattheweak(QString itkey);
+    void szintesztelo(QString itkey,int iterator, int j);
+    void eattheweak(QString itkey, int j);
     void refresh();
 
 private slots:

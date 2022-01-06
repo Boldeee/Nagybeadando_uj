@@ -220,6 +220,7 @@ void MainWindow::Upload()
         infile.close();
 
     }
+    qDebug() << "stonks";
 }
 
 void MainWindow::Generate_Field(int x, int y)
@@ -264,8 +265,10 @@ double MainWindow::tavolsag_alt(double x1,double y1,double x2, double y2)
 void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<Informacio>& Termelo, const QVector<matrix>& maszkok)
 {
     //qDebug() << "Eddig oke";
-    int melyiktermelorolvanszoR=-1,melyiktermelorolvanszoG=-1,melyiktermelorolvanszoB=-1;
+
+     //qDebug() << "Blublu1";
     for (int i = 0; i < Fogyaszto.size(); ++i) {
+        int melyiktermelorolvanszoR=-1,melyiktermelorolvanszoG=-1,melyiktermelorolvanszoB=-1;
         Coord closestR;
         double closest_R = 1000;
         Coord closestG;
@@ -274,8 +277,10 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
         double closest_B = 1000;
         Coord consumer;
         consumer.x = Fogyaszto[i].x; consumer.y = Fogyaszto[i].y;
+
         for (int j=0;j < Termelo.size() ;j++ ) {
-            if(Termelo[j].r == 1) // Ez vagy a kovi szar
+
+            if(Termelo[j].felhasznaltuk_e == false && (Fogyaszto[i].need_r !=0 || Fogyaszto[i].need_r_g !=0 || Fogyaszto[i].need_r_b !=0 || Fogyaszto[i].need_w !=0)) // Ez vagy a kovi szar
             {
                 if(maszkok[i][Termelo[j].x][Termelo[j].y] < closest_R )
                 {
@@ -283,39 +288,56 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
                 closestR.x = Termelo[j].x; closestR.y =Termelo[j].y;
                 melyiktermelorolvanszoR=j;
                 //Ezt valahogy kikene zarni ezutan
+                qDebug() << "R" << j;
+                //Termelo[j].felhasznaltuk_e = true;
                 }
-            }       else if (Termelo[j].g == 1){
+            }       else if (Termelo[j].felhasznaltuk_e == false && (Fogyaszto[i].need_g !=0 || Fogyaszto[i].need_r_g !=0 || Fogyaszto[i].need_g_b !=0 || Fogyaszto[i].need_w !=0)){
                     if(maszkok[i][Termelo[j].x][Termelo[j].y] < closest_G )
                     {
                     closest_G = maszkok[i][Termelo[j].x][Termelo[j].y];
                     closestG.x = Termelo[j].x; closestG.y =Termelo[j].y;
                     melyiktermelorolvanszoG=j;
+                    qDebug() << "G" << j;
+                    //Termelo[j].felhasznaltuk_e = true;
                     //Ezt valahogy kikene zarni ezutan
                     }
-            }           else if (Termelo[j].b == 1){
+            }           else if (Termelo[j].felhasznaltuk_e == false && (Fogyaszto[i].need_b !=0 || Fogyaszto[i].need_r_b !=0 || Fogyaszto[i].need_g_b !=0 || Fogyaszto[i].need_w !=0)){
                         if(maszkok[i][Termelo[j].x][Termelo[j].y]<closest_B )
                         {
                         closest_B = maszkok[i][Termelo[j].x][Termelo[j].y];
                         closestB.x = Termelo[j].x; closestB.y =Termelo[j].y;
                         melyiktermelorolvanszoB=j;
+                        qDebug() << "B" << j;
+                        //Termelo[j].felhasznaltuk_e = true;
                         //Ezt valahogy kikene zarni ezutan
                         }
     }
 }
-        Termelo[melyiktermelorolvanszoR].felhasznaltuk_e=true;
-        Termelo[melyiktermelorolvanszoG].felhasznaltuk_e=true;
-        Termelo[melyiktermelorolvanszoB].felhasznaltuk_e=true;
+        //qDebug() << Fogyaszto.size() << Termelo.size();
 //R
-       QString red="r"+QString::number(termelok[melyiktermelorolvanszoR].freq);
-       Convbelts[red] = CalculateRoutes_alt(closestR , consumer,red);
+        if(melyiktermelorolvanszoR != -1)
+        {
+            QString red="r"+QString::number(termelok[melyiktermelorolvanszoR].freq);
+            Convbelts[i][red] = CalculateRoutes_alt(closestR , consumer,red);
+        }
+
 //G
-       QString green="g"+QString::number(termelok[melyiktermelorolvanszoG].freq);
-       Convbelts[green] = CalculateRoutes_alt(closestG , consumer,green);
+        if(melyiktermelorolvanszoG != -1)
+        {
+            QString green="g"+QString::number(termelok[melyiktermelorolvanszoG].freq);
+            Convbelts[i][green] = CalculateRoutes_alt(closestG , consumer,green);
+        }
+
 //B
-       QString blue="b"+QString::number(termelok[melyiktermelorolvanszoB].freq);
-       Convbelts[blue] = CalculateRoutes_alt(closestB , consumer,blue);
+       if(melyiktermelorolvanszoB != -1)
+       {
+           QString blue="b"+QString::number(termelok[melyiktermelorolvanszoB].freq);
+           Convbelts[i][blue] = CalculateRoutes_alt(closestB , consumer,blue);
+       }
+
 }
     meret(Beltmasolat);
+     //qDebug() << "Blublu4";
 }
 
 QVector<Coord> MainWindow::CalculateRoutes_alt(const Coord& inspected_Producer,const Coord& inspected_Consumer,const QString& szin)
@@ -336,7 +358,6 @@ QVector<Coord> MainWindow::CalculateRoutes_alt(const Coord& inspected_Producer,c
         if(szin[0]=='b')
         {        setSelected(c.x, c.y, Builder::wayB);
         }
-
         murBmurB.setFieldmezo(c.x,c.y);
     }
     return way;
@@ -351,20 +372,23 @@ void MainWindow::advance()
 void MainWindow::spawn()
 {
  Coord prev(-1,-1);
-     for(QMap <QString, QVector<Coord>>::iterator it=Convbelts.begin();it!=Convbelts.end();it++)
+ for(int j=0; j<Convbelts.count(); j++ )
+ {
+     for(QMap <QString, QVector<Coord>>::iterator it=Convbelts[j].begin();it!=Convbelts[j].end();it++)
      {
              if(lepteto%(it.key().back().digitValue())==0)
              {
-                 if(it.key().first(0)=="r")Beltmasolat[it.key()][0].r=1;
-                 if(it.key().first(0)=="g")Beltmasolat[it.key()][0].g=1;
-                 if(it.key().first(0)=="b")Beltmasolat[it.key()][0].b=1;
+                 if(it.key().first(0)=="r")Beltmasolat[j][it.key()][0].r=1;
+                 if(it.key().first(0)=="g")Beltmasolat[j][it.key()][0].g=1;
+                 if(it.key().first(0)=="b")Beltmasolat[j][it.key()][0].b=1;
              }
              /*for(int timer=0;timer<it.key().back().digitValue();timer++){
              delay(50);
              }*/
-             int f=Convbelts[it.key()].size()-1;
+             //int f=Convbelts[j][it.key()].size()-1;
              //qDebug()<<Convbelts[it.key()][std::min(i,f)].x<<Convbelts[it.key()][std::min(i,f)].y;
      }
+ }
      /*if(prev.x!=-1&&prev.y!=-1)
        {
        }*/
@@ -375,128 +399,130 @@ void MainWindow::spawn()
 
 void MainWindow::eloreleptet()
 {
-    for(QMap <QString, QVector<rgbszin>>::iterator it=Beltmasolat.begin();it!=Beltmasolat.end();it++)
+    for(int j=0; j<Convbelts.count(); j++ )
     {
-        eattheweak(it.key());
-        Beltmasolat[it.key()][Beltmasolat[it.key()].size()-1];
-        for (int i=Beltmasolat[it.key()].size()-1;i>0;i--)
+    for(QMap <QString, QVector<rgbszin>>::iterator it=Beltmasolat[j].begin();it!=Beltmasolat[j].end();it++)
+    {
+        eattheweak(it.key() , j);
+        for (int i=0;i<Beltmasolat[j][it.key()].size()-1;i++)
         {
-            Beltmasolat[it.key()][i]=Beltmasolat[it.key()][i-1];//tovabb adja a szineket, hatulrol huzza a conveyor-n
-            szintesztelo(it.key(),i);
+            Beltmasolat[j][it.key()][i]=Beltmasolat[j][it.key()][i+1];//tovabb adja a szineket, hatulrol huzza a conveyor-n
+            szintesztelo(it.key(),i, j);
         }
     }
+    }
 }
-void MainWindow::szintesztelo(QString itkey, int iterator)
+void MainWindow::szintesztelo(QString itkey, int iterator, int j)
 {
-    if(Beltmasolat[itkey][iterator].r==1)
+    if(Beltmasolat[j][itkey][iterator].r==1)
     {
-        if(Beltmasolat[itkey][iterator].g==1)
+        if(Beltmasolat[j][itkey][iterator].g==1)
         {
-            if(Beltmasolat[itkey][iterator].b==1)
+            if(Beltmasolat[j][itkey][iterator].b==1)
             {
-            setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convW);
+            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convW);
             }else
             {
-            setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convRG);
+            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRG);
             }
         }
-        if(Beltmasolat[itkey][iterator].b==1)
+        if(Beltmasolat[j][itkey][iterator].b==1)
         {
-        setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convRB);
+        setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRB);
         }
-    setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convR);
+    setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convR);
 
-    }else if(Beltmasolat[itkey][iterator].g==1)
+    }else if(Beltmasolat[j][itkey][iterator].g==1)
     {
-        if(Beltmasolat[itkey][iterator].r==1)
+        if(Beltmasolat[j][itkey][iterator].r==1)
         {
-            if(Beltmasolat[itkey][iterator].b==1)
+            if(Beltmasolat[j][itkey][iterator].b==1)
             {
-            setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convW);
+            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convW);
             }else
             {
-            setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convRG);
+            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRG);
             }
         }
-        if(Beltmasolat[itkey][iterator].b==1)
+        if(Beltmasolat[j][itkey][iterator].b==1)
         {
-        setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convGB);
+        setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convGB);
         }
-    setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convG);
+    setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convG);
 
 
-    }else if(Beltmasolat[itkey][iterator].b==1)
+    }else if(Beltmasolat[j][itkey][iterator].b==1)
     {
-        if(Beltmasolat[itkey][iterator].g==1)
+        if(Beltmasolat[j][itkey][iterator].g==1)
         {
-            if(Beltmasolat[itkey][iterator].r==1)
+            if(Beltmasolat[j][itkey][iterator].r==1)
             {
-            setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convW);
+            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convW);
             }else
             {
-            setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convGB);
+            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convGB);
             }
         }
-        if(Beltmasolat[itkey][iterator].r==1)
+        if(Beltmasolat[j][itkey][iterator].r==1)
         {
-        setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convRB);
+        setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRB);
         }
-    setdoboz(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::convB);
+    setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convB);
     }
     if(itkey.first(0)=="r")
     {
-        setSelected(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::wayR);
+        setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::wayR);
     }   if(itkey.first(0)=="g")
     {
-        setSelected(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::wayG);
+        setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::wayG);
     }   if(itkey.first(0)=="b")
     {
-        setSelected(Convbelts[itkey][iterator].x,Convbelts[itkey][iterator].y,Builder::wayB);
+        setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::wayB);
     }
 }
 
-void MainWindow::eattheweak(QString itkey)
+void MainWindow::eattheweak(QString itkey, int j)
 {
     //kene tudni a fogyasztot exactly akit vizsgalunk
-    if( maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
-        Beltmasolat[itkey][Beltmasolat[itkey].size()-1].r == 1 &&
-        Beltmasolat[itkey][Beltmasolat[itkey].size()-1].g == 1 &&
-        Beltmasolat[itkey][Beltmasolat[itkey].size()-1].b == 1 &&
+    if( maszkok[j][(Convbelts[j][itkey][0]).x][(Convbelts[j][itkey][0]).y] == 1 &&
+        Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].r == 1 &&
+        Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].g == 1 &&
+        Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].b == 1 &&
         fogyasztok[0].need_w != 0)
     {
         fogyasztok[0].need_w -=1;
-    }else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
-             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].r == 1 &&
-             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].g == 1 &&
+    }else if(maszkok[j][(Convbelts[j][itkey][0]).x][(Convbelts[j][itkey][0]).y] == 1 &&
+             Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].r == 1 &&
+             Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].g == 1 &&
              fogyasztok[0].need_r_g != 0)
     {
         fogyasztok[0].need_r_g-=1;
     }
-    else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
-            Beltmasolat[itkey][Beltmasolat[itkey].size()-1].r == 1 &&
-            Beltmasolat[itkey][Beltmasolat[itkey].size()-1].b == 1 &&
+    else if(maszkok[j][(Convbelts[j][itkey][0]).x][(Convbelts[j][itkey][0]).y] == 1 &&
+            Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].r == 1 &&
+            Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].b == 1 &&
             fogyasztok[0].need_r_b != 0)
     {
         fogyasztok[0].need_r_b-=1;
     }
-    else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
-            Beltmasolat[itkey][Beltmasolat[itkey].size()-1].g == 1&&
-            Beltmasolat[itkey][Beltmasolat[itkey].size()-1].b == 1&&
+    else if(maszkok[j][(Convbelts[j][itkey][0]).x][(Convbelts[j][itkey][0]).y] == 1 &&
+            Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].g == 1&&
+            Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].b == 1&&
             fogyasztok[0].need_g_b != 0)
     {
         fogyasztok[0].need_g_b -=1;
-    }else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
-             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].r == 1&&
+    }else if(maszkok[j][(Convbelts[j][itkey][0]).x][(Convbelts[j][itkey][0]).y] == 1 &&
+             Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].r == 1&&
              fogyasztok[0].need_r != 0)
     {
         fogyasztok[0].need_r -=1;
-    }else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
-             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].g == 1&&
+    }else if(maszkok[j][(Convbelts[j][itkey][0]).x][(Convbelts[j][itkey][0]).y] == 1 &&
+             Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].g == 1&&
              fogyasztok[0].need_g != 0)
     {
          fogyasztok[0].need_g -=1;
-    }else if(maszkok[0][(Convbelts[itkey][Convbelts[itkey].size()-1]).x][(Convbelts[itkey][Convbelts[itkey].size()-1]).y] == 1 &&
-             Beltmasolat[itkey][Beltmasolat[itkey].size()-1].b == 1&& fogyasztok[0].need_b != 0)
+    }else if(maszkok[j][(Convbelts[j][itkey][0]).x][(Convbelts[j][itkey][0]).y] == 1 &&
+             Beltmasolat[j][itkey][Beltmasolat[j][itkey].size()-1].b == 1&& fogyasztok[0].need_b != 0)
     {
          fogyasztok[0].need_b -=1;
     }else
@@ -530,19 +556,24 @@ int MainWindow::leghosszabbkereses(QMap <QString, QVector<Coord>>& keresett)
     }
     return leghosszabb;
 }
-QMap <QString, QVector<rgbszin>> MainWindow::meret(QMap <QString, QVector<rgbszin>>& beltmasolat_alt)
+QMap <int , QMap <QString, QVector<rgbszin>>> MainWindow::meret(QMap< int, QMap <QString, QVector<rgbszin>>>& beltmasolat_alt)
 {
     rgbszin tempszin;
     tempszin.r=0;
     tempszin.g=0;
     tempszin.b=0;
-    for(QMap <QString, QVector<Coord>>::iterator it=Convbelts.begin();it!=Convbelts.end();it++)
+    for(int j=0; j<Convbelts.count(); j++ )
+    {
+
+
+    for( QMap <QString, QVector<Coord>>::iterator it=Convbelts[j].begin();it!=Convbelts[j].end();it++)
     {
         //*qDebug()<<it.key()<<beltmasolat_alt[it.key()];
-        for(int i=0;i<Convbelts[it.key()].size();i++)
+        for(int i=0;i<Convbelts[j][it.key()].size();i++)
         {
-            beltmasolat_alt[it.key()].push_back(tempszin);
+            beltmasolat_alt[j][it.key()].push_back(tempszin);
         }
+    }
     }
     return beltmasolat_alt;
 }
