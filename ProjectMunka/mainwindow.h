@@ -18,12 +18,16 @@
 #include "builder.h"
 #include "routemaker.h"
 #include <stdio.h>
+#include <QPainter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 typedef QVector<QVector<double>> matrix;
-
+struct rgbszin
+{
+    int r=0,g=0,b=0;
+};
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -60,8 +64,10 @@ public:
     QVector<Informacio> fogyasztok;
     QVector<matrix> maszkok;
     QMap <QString, QVector<Coord>> Convbelts;
+    QMap <QString, QVector<rgbszin>> Beltmasolat;
     int XX,YY;
     bool animation; //Lehet kelleni fog
+    int lepteto=0;
 
     RouteMaker murBmurB{0,0};
     //RouteMaker BrumBrum(int XX,int YY);
@@ -72,13 +78,20 @@ public slots:
     void tavolsag(QVector<QVector<double>>& maszk,int fogyasztoX,int fogyasztoY);
     double tavolsag_alt(double x1,double y1,double x2, double y2);
     void CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<Informacio>& Termelo, const QVector<matrix>& maszkok);
-    QVector<Coord> CalculateRoutes_alt(const Coord& inspected_Producer, const Coord& inspected_Consumer);
-    void mozgatosdi();
+    QVector<Coord> CalculateRoutes_alt(const Coord& inspected_Producer, const Coord& inspected_Consumer,const QString& szin);
+    void spawn();
     int leghosszabbkereses(QMap <QString, QVector<Coord>>& keresett);
+    QMap <QString, QVector<rgbszin>> meret(QMap <QString, QVector<rgbszin>>& beltmasolat_alt);
+    void advance();
+    void eloreleptet();
+    void szintesztelo(QString itkey,int iterator);
+
 private slots:
     void on_showWayButton_clicked();
 
     void on_animationButton_clicked();
+
+    void on_leptetbtn_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -104,6 +117,7 @@ private:
    Builder* fieldAt(int x, int y);
    void Painter(QVector<Informacio> Fogyaszto, QVector<Informacio> Termelok);
    void setSelected(int x, int y, Builder::Function f = Builder::selected);
+   void setdoboz(int x, int y, Builder::Function f=Builder::selected);
    /*
    void setFinal(int x, int y);
    void setWall(int x, int y);

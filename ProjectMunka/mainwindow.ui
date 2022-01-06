@@ -192,6 +192,13 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="leptetbtn">
+           <property name="text">
+            <string>leptet</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -218,7 +225,7 @@
      <x>0</x>
      <y>0</y>
      <width>861</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

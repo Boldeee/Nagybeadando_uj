@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QWidget>
 #include <QLabel>
+#include<QPainter>
 
 class Builder : public QLabel
 {
@@ -14,11 +15,16 @@ public:
     enum Function {
         //base, producer, consumer, conveyor,
         base,  conveyor, Consumer,  Producer_Red /*wall volt*/, Producer_Green /*selected volt*/,  Producer_Blue /*origin volt*/, way, selected,
+        convR,convG,convB,convRG,convRB,convGB,convW,
+        wayR,wayG,wayB
     };
+
     void setFunction(Function f);
     Function getFunction() const;
     int getX() const;
     int getY() const;
+    void setszalagFunction(Function f);
+    void drawszalagra ();
 
 /*signals:
     void clicked(int x, int y, Qt::MouseButton m);

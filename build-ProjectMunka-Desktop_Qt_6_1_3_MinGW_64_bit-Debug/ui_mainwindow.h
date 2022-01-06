@@ -58,6 +58,7 @@ public:
     QLabel *label_2;
     QSpinBox *heightBox;
     QPushButton *resizeButton;
+    QPushButton *leptetbtn;
     QSpacerItem *verticalSpacer_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -185,6 +186,11 @@ public:
 
         verticalLayout_4->addWidget(resizeButton);
 
+        leptetbtn = new QPushButton(groupBox_2);
+        leptetbtn->setObjectName(QString::fromUtf8("leptetbtn"));
+
+        verticalLayout_4->addWidget(leptetbtn);
+
 
         verticalLayout_3->addWidget(groupBox_2);
 
@@ -198,7 +204,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 861, 26));
+        menubar->setGeometry(QRect(0, 0, 861, 25));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -224,6 +230,7 @@ public:
         label->setText(QCoreApplication::translate("MainWindow", "Width", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Height", nullptr));
         resizeButton->setText(QCoreApplication::translate("MainWindow", "Resize", nullptr));
+        leptetbtn->setText(QCoreApplication::translate("MainWindow", "leptet", nullptr));
     } // retranslateUi
 
 };
