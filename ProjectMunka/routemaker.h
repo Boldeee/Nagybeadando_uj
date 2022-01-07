@@ -36,6 +36,7 @@ public:
 
     void setStart(const Coord &newStart);
     void setFieldmezo(int x, int y);
+    void antisetFieldmezo(int x, int y);
     void setEnd(const Coord &newEnd);
     void getPath(QVector<Coord> &shortestPath,
                  QVector<Coord> &discoveredFields);

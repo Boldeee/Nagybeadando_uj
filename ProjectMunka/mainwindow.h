@@ -50,6 +50,7 @@ public:
             int need_w=0;//feher
     int ID=0;
     int fogyasztoID=-1;
+    bool wedone=false;;
   /*0)mi ez
     1)termelo mit termel/   fogyaszto Red mennyi/       Üres R
     2)termelo hany tik/     fogyaszto Green mennyi/     Üres G
@@ -62,13 +63,14 @@ public:
     };
     QVector<Informacio> termelok;
     QVector<Informacio> fogyasztok;
+    rgbszin eattheweak_osszesito{0,0,0};
     QVector<matrix> maszkok;
     QMap<int , QMap <QString, QVector<Coord>>> Convbelts;  //Fogyaszto id-> szin alapjan melyik termeleo -> neki az uta
     QMap<int , QMap <QString, QVector<rgbszin>>> Beltmasolat;
     int XX,YY;
     bool animation; //Lehet kelleni fog
     int lepteto=0;
-    bool wedone = false;
+    bool absolutewedone = false;
 
     RouteMaker murBmurB{0,0};
     //RouteMaker BrumBrum(int XX,int YY);
@@ -86,7 +88,7 @@ public slots:
     void advance();
     void eloreleptet();
     void szintesztelo(QString itkey,int iterator, int j);
-    void eattheweak(QString itkey, int j);
+    void eattheweak(int j);
     void refresh();
 
 private slots:

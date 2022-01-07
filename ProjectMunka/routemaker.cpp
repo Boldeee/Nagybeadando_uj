@@ -21,6 +21,11 @@ void RouteMaker::setFieldmezo(int x, int y)
 {
     field[x][y]=1;
 }
+void RouteMaker::antisetFieldmezo(int x, int y)
+{
+    field[x][y]=0;
+}
+
 void RouteMaker::setStart(const Coord &newStart)
 {
     start = newStart;
