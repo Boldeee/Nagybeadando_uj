@@ -70,6 +70,7 @@ public:
     int XX,YY;
     bool animation; //Lehet kelleni fog
     int lepteto=0;
+    int idomero=0;
     bool absolutewedone = false;
     RouteMaker murBmurB{0,0};
     //RouteMaker BrumBrum(int XX,int YY);

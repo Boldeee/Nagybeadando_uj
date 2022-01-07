@@ -8,13 +8,14 @@ MainWindow::MainWindow(QWidget *parent)
       ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    idomero=0;
     Upload();
+
     placement();
     murBmurB={XX,YY};
     setupField(XX , YY);
     Painter(fogyasztok, termelok);
     CalculateRoutes(fogyasztok,termelok,maszkok);
-//    advance();
 }
 
 MainWindow::~MainWindow()
@@ -34,7 +35,6 @@ void MainWindow::setupField(int XX, int YY)
     int size = std::min(500/XX, 500/YY);
 
     ui->gridLayout->setSpacing(size/10);
-    ui->groupBox->setFixedWidth(100);
 
     for(int i=0; i<XX; i++)
     {
@@ -70,13 +70,13 @@ void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termel
  //       fieldAt(Fogyaszto[i].x, Fogyaszto[i].y)->setText(QString::number(Fogyaszto[i].need_r));
         fieldAt(Fogyaszto[i].x, Fogyaszto[i].y)->setFunction(Builder::Consumer);        
         check.x = Fogyaszto[i].x; check.y = Fogyaszto[i].y;
-        ui->reqR->setText(QString::number(Fogyaszto[i].need_r));
+       /* ui->reqR->setText(QString::number(Fogyaszto[i].need_r));
         ui->reqG->setText(QString::number(Fogyaszto[i].need_g));
         ui->reqB->setText(QString::number(Fogyaszto[i].need_b));
         ui->reqRG->setText(QString::number(Fogyaszto[i].need_r_g));
         ui->reqRB->setText(QString::number(Fogyaszto[i].need_r_b));
         ui->reqBC->setText(QString::number(Fogyaszto[i].need_g_b));
-        ui->reqRGB->setText(QString::number(Fogyaszto[i].need_w));
+        ui->reqRGB->setText(QString::number(Fogyaszto[i].need_w));/*/
     }
     for(int i=0; i<Termelok.size(); i++)
     {
@@ -106,7 +106,7 @@ void MainWindow::Upload()
     QString line;
     QStringList linesplit;
     int howmany;
-    QFile infile("asd.txt"); // Kiválasztási lehetőség?
+    QFile infile("Nincsfutoszallag.txt"); // Kiválasztási lehetőség?
     if(infile.open(QIODevice::ReadWrite))
     {
         QTextStream stream(&infile);
@@ -173,7 +173,7 @@ void MainWindow::Upload()
         infile.close();
 
     }
-    qDebug() << "stonks";
+    //qDebug() << "stonks";
 }
 
 
@@ -218,9 +218,6 @@ double MainWindow::tavolsag_alt(double x1,double y1,double x2, double y2)
 
 void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<Informacio>& Termelo, const QVector<matrix>& maszkok)
 {
-    //qDebug() << "Eddig oke";
-
-     //qDebug() << "Blublu1";
     for (int i = 0; i < Fogyaszto.size(); ++i) {
         int melyiktermelorolvanszoR=-1,melyiktermelorolvanszoG=-1,melyiktermelorolvanszoB=-1;
         Coord closestR;
@@ -234,7 +231,7 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
 
         for (int j=0;j < Termelo.size() ;j++ ) {
 
-            if(Termelo[j].felhasznaltuk_e == false && Termelo[j].r !=0 && (Fogyaszto[i].need_r !=0 || Fogyaszto[i].need_r_g !=0 || Fogyaszto[i].need_r_b !=0 || Fogyaszto[i].need_w !=0)) // Ez vagy a kovi szar
+            if(Termelo[j].felhasznaltuk_e == false && Termelo[j].r !=0 && (Fogyaszto[i].need_r !=0 || Fogyaszto[i].need_r_g !=0 || Fogyaszto[i].need_r_b !=0 || Fogyaszto[i].need_w !=0))
             {
                 if(maszkok[i][Termelo[j].x][Termelo[j].y] < closest_R )
                 {
@@ -242,7 +239,7 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
                 closestR.x = Termelo[j].x; closestR.y =Termelo[j].y;
                 melyiktermelorolvanszoR=j;
                 //Ezt valahogy kikene zarni ezutan
-                qDebug() << "R" << i;
+                //qDebug() << "R" << i;
                 }
             }
             if (Termelo[j].felhasznaltuk_e == false && Termelo[j].g !=0 && (Fogyaszto[i].need_g !=0 || Fogyaszto[i].need_r_g !=0 || Fogyaszto[i].need_g_b !=0 || Fogyaszto[i].need_w !=0)){
@@ -251,7 +248,7 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
                     closest_G = maszkok[i][Termelo[j].x][Termelo[j].y];
                     closestG.x = Termelo[j].x; closestG.y =Termelo[j].y;
                     melyiktermelorolvanszoG=j;
-                    qDebug() << "G" << i;
+                    //qDebug() << "G" << i;
                     //Ezt valahogy kikene zarni ezutan
                     }
             }
@@ -261,7 +258,7 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
                         closest_B = maszkok[i][Termelo[j].x][Termelo[j].y];
                         closestB.x = Termelo[j].x; closestB.y =Termelo[j].y;
                         melyiktermelorolvanszoB=j;
-                        qDebug() << "B" << i;
+                        //qDebug() << "B" << i;
                         //Ezt valahogy kikene zarni ezutan
                         }
     }
@@ -274,24 +271,37 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
             QString red="r"+QString::number(termelok[melyiktermelorolvanszoR].freq);
             Convbelts[i][red] = CalculateRoutes_alt(closestR , consumer,red);
         }
+        if((Fogyaszto[i].need_r!=0 ||Fogyaszto[i].need_r_b!=0 ||Fogyaszto[i].need_r_g!=0 ||Fogyaszto[i].need_w!=0 )&&melyiktermelorolvanszoR ==-1)
+        {
+            qDebug()<<"nincs elég piros";
+            std::exit (80085);
+        }
 
 //G
         if(melyiktermelorolvanszoG != -1)
         {
             Termelo[melyiktermelorolvanszoG].felhasznaltuk_e = true;
-
             QString green="g"+QString::number(termelok[melyiktermelorolvanszoG].freq);
             Convbelts[i][green] = CalculateRoutes_alt(closestG , consumer,green);
         }
-
+        if((Fogyaszto[i].need_g!=0 ||Fogyaszto[i].need_g_b!=0 ||Fogyaszto[i].need_r_g!=0 ||Fogyaszto[i].need_w!=0 )&&melyiktermelorolvanszoG ==-1)
+        {
+            qDebug()<<"nincs elég zöld";
+            std::exit (80085);
+        }
 //B
        if(melyiktermelorolvanszoB != -1)
        {
            Termelo[melyiktermelorolvanszoB].felhasznaltuk_e = true;
-
            QString blue="b"+QString::number(termelok[melyiktermelorolvanszoB].freq);
            Convbelts[i][blue] = CalculateRoutes_alt(closestB , consumer,blue);
        }
+       if((Fogyaszto[i].need_b!=0 ||Fogyaszto[i].need_g_b!=0 ||Fogyaszto[i].need_r_b!=0 ||Fogyaszto[i].need_w!=0 )&&melyiktermelorolvanszoB ==-1)
+       {
+           qDebug()<<"nincs elég kék";
+           std::exit (80085);
+       }
+
 
 }
     meret(Beltmasolat);
@@ -305,8 +315,17 @@ QVector<Coord> MainWindow::CalculateRoutes_alt(const Coord& inspected_Producer,c
     murBmurB.setEnd(inspected_Consumer);
     QVector<Coord> way;
     QVector<Coord> discoveredField;
+    for(int i=0; i<fogyasztok.size();i++)
+    {
+        murBmurB.setFieldmezo(fogyasztok[i].x,fogyasztok[i].y);
+    }
     murBmurB.antisetFieldmezo(inspected_Consumer.x,inspected_Consumer.y);
     murBmurB.getPath(way, discoveredField);
+    /*if(abs(way[way.size()-1].x-inspected_Consumer.x)>=1&&abs(way[way.size()-1].y-inspected_Consumer.y)>=1)
+    {
+        qDebug()<<"nem lehetséges elérni a fogyasztót";
+        exit(80085);
+    }*/
     for (Coord c: way) {
         if(szin[0]=='r')
         {        setSelected(c.x, c.y, Builder::wayR);
@@ -317,7 +336,7 @@ QVector<Coord> MainWindow::CalculateRoutes_alt(const Coord& inspected_Producer,c
         if(szin[0]=='b')
         {        setSelected(c.x, c.y, Builder::wayB);
         }
-        //murBmurB.setFieldmezo(c.x,c.y);
+        murBmurB.setFieldmezo(c.x,c.y);
         murBmurB.setFieldmezo(inspected_Consumer.x, inspected_Consumer.y);
         murBmurB.setFieldmezo(inspected_Producer.x,inspected_Producer.y);
     }
@@ -326,7 +345,8 @@ QVector<Coord> MainWindow::CalculateRoutes_alt(const Coord& inspected_Producer,c
 void MainWindow::advance()
 {
     while(!absolutewedone){
-        delay(100);
+        delay(idomero);
+
         eloreleptet();
         spawn();
         refresh();
@@ -400,9 +420,7 @@ void MainWindow::eloreleptet()
         eattheweak_osszesito.b=0;
     for(QMap <QString, QVector<rgbszin>>::iterator it=Beltmasolat[j].begin();it!=Beltmasolat[j].end();it++)
     {
-        if(Beltmasolat[j][it.key()][0].r==1)eattheweak_osszesito.r=1;
-        if(Beltmasolat[j][it.key()][0].g==1)eattheweak_osszesito.g=1;
-        if(Beltmasolat[j][it.key()][0].b==1)eattheweak_osszesito.b=1;
+
         int i;
         for (i=0;i<Beltmasolat[j][it.key()].size()-1;i++)
         {
@@ -422,10 +440,14 @@ void MainWindow::eloreleptet()
 
             //tovabb adja a szineket, hatulrol huzza a conveyor-n
         }
+        if(Beltmasolat[j][it.key()][0].r==1)eattheweak_osszesito.r=1;
+        if(Beltmasolat[j][it.key()][0].g==1)eattheweak_osszesito.g=1;
+        if(Beltmasolat[j][it.key()][0].b==1)eattheweak_osszesito.b=1;
         //szintesztelo(it.key(),i, j);
 
-        //qDebug()<<"beltvege";
     }
+    refresh();
+    delay(idomero);
     eattheweak(j);
     }
 }
@@ -502,6 +524,8 @@ void MainWindow::szintesztelo(QString itkey, int iterator, int j)
 
 void MainWindow::eattheweak(int j)
 {
+    //qDebug()<<eattheweak_osszesito.r <<eattheweak_osszesito.g <<eattheweak_osszesito.b;
+
 
     //kene tudni a fogyasztot exactly akit vizsgalunk
     if( eattheweak_osszesito.r == 1 &&
@@ -583,13 +607,13 @@ void MainWindow::refresh()
 {
     for(int i=0; i<fogyasztok.size(); i++)//Ezt fixált adattal kikell potolni
     {
-        ui->reqR->setText(QString::number(fogyasztok[i].need_r));
+        /*ui->reqR->setText(QString::number(fogyasztok[i].need_r));
         ui->reqG->setText(QString::number(fogyasztok[i].need_g));
         ui->reqB->setText(QString::number(fogyasztok[i].need_b));
         ui->reqRG->setText(QString::number(fogyasztok[i].need_r_g));
         ui->reqRB->setText(QString::number(fogyasztok[i].need_r_b));
         ui->reqBC->setText(QString::number(fogyasztok[i].need_g_b));
-        ui->reqRGB->setText(QString::number(fogyasztok[i].need_w));
+        ui->reqRGB->setText(QString::number(fogyasztok[i].need_w));*/
     }
     for(int j=0; j<Convbelts.count(); j++ )
     {

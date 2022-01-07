@@ -82,9 +82,9 @@ void RouteMaker::getPath(QVector<Coord> &shortestPath, QVector<Coord> &discovere
      std::priority_queue<State> stateQueue;
      State initState(start.x, start.y ,0);
      stateQueue.push(initState);
-
          while(stateQueue.size()>0)
          {
+
              State actualstate =stateQueue.top();
              stateQueue.pop();
              if(actualstate.x!=start.x&&actualstate.y!=start.y)discoveredFields.push_back(Coord(actualstate.x,actualstate.y));
@@ -110,12 +110,15 @@ void RouteMaker::getPath(QVector<Coord> &shortestPath, QVector<Coord> &discovere
              }
             }
         if(convbelt[end.x][end.y].pdis<INT_MAX)break;
+
         }
      path it=convbelt[end.x][end.y];
      while(it.px!=start.x||it.py!=start.y)
      {
-         //qDebug() << "routemaker 106.sor kornyeken beakadok"<<it.px<<it.py; ///nem lepteti ez a szar, valami nincs nullazva, oldalra nem lép (?), x-ek y-ok jól vannak kódolva?
+         //qDebug() << "routemaker 106.sor kornyeken beakadok"<<it.px<<it.py;
          shortestPath.push_back(Coord(it.px,it.py));
          it=convbelt[it.px][it.py];
      }
-    }
+
+
+}
