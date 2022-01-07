@@ -71,7 +71,6 @@ public:
     bool animation; //Lehet kelleni fog
     int lepteto=0;
     bool absolutewedone = false;
-
     RouteMaker murBmurB{0,0};
     //RouteMaker BrumBrum(int XX,int YY);
 public slots:
@@ -102,6 +101,7 @@ private:
     Ui::MainWindow *ui;
     const QVector<QVector<Informacio> > &getField() const;
     const QVector<Informacio> &getInfo() const;
+    void Enough(QVector<Informacio> termelok, QVector<Informacio> fogyasztok);
 
 
     void Upload();
@@ -122,7 +122,6 @@ private:
    Builder* fieldAt(int x, int y);
    void Painter(QVector<Informacio> Fogyaszto, QVector<Informacio> Termelok);
    void setSelected(int x, int y, Builder::Function f = Builder::selected);
-   void setdoboz(int x, int y, Builder::Function f=Builder::selected);
    /*
    void setFinal(int x, int y);
    void setWall(int x, int y);

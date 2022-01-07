@@ -29,6 +29,7 @@ void Builder::drawPicture()
         break;
     case Consumer:
         basicImage.fill(Qt::black);
+        break;
     case way:
         basicImage.fill(Qt::darkMagenta);
         break;
@@ -44,58 +45,29 @@ void Builder::drawPicture()
     case selected:
         basicImage.fill((Qt::gray));
         break;
-
-    }
-    setPixmap(basicImage.scaled(size,size));
-
-}
-void Builder::drawszalagra()
-{
-    QPainter doboz(&basicImage);
-    QRect dobozka;
-    dobozka.setHeight(30);
-    dobozka.setWidth(30);
-    //dobozka.setCoords(x-10,y-10,x+10,y+10);
-
-    switch (function) {
     case convR:
-        doboz.setBrush(Qt::red);
-        doboz.drawRect(dobozka);
+        basicImage.fill((Qt::red));
         break;
     case convG:
-        doboz.setBrush(Qt::green);
-        doboz.drawRect(dobozka);
+        basicImage.fill((Qt::green));
         break;
     case convB:
-        doboz.setBrush(Qt::blue);
-        doboz.drawRect(dobozka);
+        basicImage.fill((Qt::blue));
         break;
     case convRG:
-        doboz.setBrush(Qt::yellow);
-        doboz.drawRect(dobozka);
+        basicImage.fill((Qt::yellow));
         break;
     case convRB:
-        doboz.setBrush(Qt::magenta);
-        doboz.drawRect(dobozka);
+        basicImage.fill((Qt::magenta));
         break;
     case convGB:
-        doboz.setBrush(Qt::cyan);
-        doboz.drawRect(dobozka);
+        basicImage.fill((Qt::cyan));
         break;
     case convW:
-        doboz.setBrush(Qt::white);
-        doboz.drawRect(dobozka);
-        break;
-    case wayR:
-        basicImage.fill(Qt::darkRed);
-        break;
-    case wayG:
-        basicImage.fill(Qt::darkGreen);
-        break;
-    case wayB:
-        basicImage.fill(Qt::darkBlue);
+        basicImage.fill((Qt::white));
         break;
         }
+    setPixmap(basicImage.scaled(size,size));
 }
 
 int Builder::getY() const
@@ -113,11 +85,7 @@ void Builder::setFunction(Function f)
     function = f;
     drawPicture();
 }
-void Builder::setszalagFunction(Function f)
-{
-    function=f;
-    drawszalagra();
-}
+
 
 Builder::Function Builder::getFunction() const
 {

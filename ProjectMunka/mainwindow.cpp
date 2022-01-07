@@ -89,53 +89,6 @@ void MainWindow::Painter(QVector<Informacio>Fogyaszto, QVector<Informacio>Termel
     }
 }
 
-/*void MainWindow::on_showWayButton_clicked()
-{
-    //Itt nem tudja meg mi kozott keressen utat
-    QVector<Coord> way;
-    QVector<Coord> discoveredField;
-    murBmurB.getPath(way, discoveredField);
-    ui->fieldNumLabel->setText(QString::number(discoveredField.size()));
-    ui->shortWayLabel->setText(QString::number(way.size()));
-
-    for (Coord c: way) {
-        setSelected(c.x, c.y, Builder::way);
-    }
-}
-
-void MainWindow::on_animationButton_clicked()
-{
-    QVector<Coord> way;
-    QVector<Coord> discoveredField;
-    murBmurB.getPath(way, discoveredField);
-    animation = true;
-    int discovered = 0;
-
-
-    for (Coord c: discoveredField) {
-        delay(50);
-        setSelected(c.x, c.y,Builder::selected);
-        discovered++;
-        ui->fieldNumLabel->setText(QString::number(discovered));
-    }
-
-
-    int wayLength = 0;
-
-    for (Coord c: way) {
-        delay(100);
-        setSelected(c.x, c.y,Builder::way);
-        wayLength++;
-        ui->shortWayLabel->setText(QString::number(wayLength));
-    }
-
-    animation = false;
-
-}*/
-void MainWindow::setdoboz(int x, int y, Builder::Function f)
-{
-    fieldAt(x,y)->setszalagFunction(f);
-}
 void MainWindow::setSelected(int x, int y, Builder::Function f)
 {
    /*if (!(x == final.x && y == final.y) &&
@@ -222,6 +175,7 @@ void MainWindow::Upload()
     }
     qDebug() << "stonks";
 }
+
 
 void MainWindow::Generate_Field(int x, int y)
 {
@@ -363,7 +317,7 @@ QVector<Coord> MainWindow::CalculateRoutes_alt(const Coord& inspected_Producer,c
         if(szin[0]=='b')
         {        setSelected(c.x, c.y, Builder::wayB);
         }
-        murBmurB.setFieldmezo(c.x,c.y);
+        //murBmurB.setFieldmezo(c.x,c.y);
         murBmurB.setFieldmezo(inspected_Consumer.x, inspected_Consumer.y);
         murBmurB.setFieldmezo(inspected_Producer.x,inspected_Producer.y);
     }
@@ -483,17 +437,17 @@ void MainWindow::szintesztelo(QString itkey, int iterator, int j)
         {
             if(Beltmasolat[j][itkey][iterator].b==1)
             {
-            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convW);
+            setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convW);
             }else
             {
-            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRG);
+            setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRG);
             }
         }
         if(Beltmasolat[j][itkey][iterator].b==1)
         {
-        setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRB);
+        setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRB);
         }
-    setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::Producer_Red);
+    setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convR);
 
     }else if(Beltmasolat[j][itkey][iterator].g==1)
     {
@@ -501,17 +455,17 @@ void MainWindow::szintesztelo(QString itkey, int iterator, int j)
         {
             if(Beltmasolat[j][itkey][iterator].b==1)
             {
-            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convW);
+            setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convW);
             }else
             {
-            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRG);
+            setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRG);
             }
         }
         if(Beltmasolat[j][itkey][iterator].b==1)
         {
-        setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convGB);
+        setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convGB);
         }
-    setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::Producer_Green);
+    setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convG);
 
 
     }else if(Beltmasolat[j][itkey][iterator].b==1)
@@ -520,17 +474,17 @@ void MainWindow::szintesztelo(QString itkey, int iterator, int j)
         {
             if(Beltmasolat[j][itkey][iterator].r==1)
             {
-            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convW);
+            setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convW);
             }else
             {
-            setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convGB);
+            setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convGB);
             }
         }
         if(Beltmasolat[j][itkey][iterator].r==1)
         {
-        setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRB);
+        setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRB);
         }
-    setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::Producer_Blue);
+    setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convB);
     }
     else if(itkey[0]=='r')
     {
@@ -562,8 +516,7 @@ void MainWindow::eattheweak(int j)
         Beltmasolat[j][it.key()][0].b = 0;
         }
 
-    }
-    if(eattheweak_osszesito.r == 1 &&
+    }else if(eattheweak_osszesito.r == 1 &&
             eattheweak_osszesito.g == 1)
     {
         if(fogyasztok[j].need_r_g>0)fogyasztok[j].need_r_g-=1;
@@ -572,8 +525,7 @@ void MainWindow::eattheweak(int j)
         Beltmasolat[j][it.key()][0].r -= 1;
         Beltmasolat[j][it.key()][0].g -= 1;
         }
-    }
-    if(eattheweak_osszesito.r == 1 &&
+    }else if(eattheweak_osszesito.r == 1 &&
             eattheweak_osszesito.b == 1)
     {
         if(fogyasztok[j].need_r_b>0)fogyasztok[j].need_r_b-=1;
@@ -582,8 +534,7 @@ void MainWindow::eattheweak(int j)
         Beltmasolat[j][it.key()][0].r -= 1;
         Beltmasolat[j][it.key()][0].b -= 1;
         }
-    }
-    if(eattheweak_osszesito.g == 1&&
+    }else if(eattheweak_osszesito.g == 1&&
             eattheweak_osszesito.b == 1)
     {
         if(fogyasztok[j].need_g_b>0)fogyasztok[j].need_g_b -=1;
@@ -592,24 +543,21 @@ void MainWindow::eattheweak(int j)
         Beltmasolat[j][it.key()][0].g -= 1;
         Beltmasolat[j][it.key()][0].b -= 1;
         }
-    }
-    if(eattheweak_osszesito.r == 1)
+    }else if(eattheweak_osszesito.r == 1)
     {
         if(fogyasztok[j].need_r>0)fogyasztok[j].need_r -=1;
         for(QMap <QString, QVector<rgbszin>>::iterator it=Beltmasolat[j].begin();it!=Beltmasolat[j].end();it++)
         {
         Beltmasolat[j][it.key()][0].r -= 1;
         }
-    }
-    if(eattheweak_osszesito.g == 1)
+    }else if(eattheweak_osszesito.g == 1)
     {
         if(fogyasztok[j].need_g>0)fogyasztok[j].need_g -=1;
         for(QMap <QString, QVector<rgbszin>>::iterator it=Beltmasolat[j].begin();it!=Beltmasolat[j].end();it++)
         {
          Beltmasolat[j][it.key()][0].g -= 1;
         }
-    }
-    if(eattheweak_osszesito.b == 1)
+    }else if(eattheweak_osszesito.b == 1)
     {
          if(fogyasztok[j].need_b>0)fogyasztok[j].need_b -=1;
          for(QMap <QString, QVector<rgbszin>>::iterator it=Beltmasolat[j].begin();it!=Beltmasolat[j].end();it++)

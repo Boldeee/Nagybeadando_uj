@@ -18,7 +18,6 @@ public:
         base,  conveyor, Consumer,  Producer_Red /*wall volt*/, Producer_Green /*selected volt*/,  Producer_Blue /*origin volt*/, way, selected,
         convR,convG,convB,convRG,convRB,convGB,convW,
         wayR,wayG,wayB,
-        dobozka
     };
 
     void setFunction(Function f);
@@ -26,8 +25,6 @@ public:
     int getX() const;
     int getY() const;
     void setszalagFunction(Function f);
-    void drawszalagra ();
-
 /*signals:
     void clicked(int x, int y, Qt::MouseButton m);
     void hovered(int x, int y);*/
