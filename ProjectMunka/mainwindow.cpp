@@ -280,7 +280,7 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
 
         for (int j=0;j < Termelo.size() ;j++ ) {
 
-            if(Termelo[j].felhasznaltuk_e == false && (Fogyaszto[i].need_r !=0 || Fogyaszto[i].need_r_g !=0 || Fogyaszto[i].need_r_b !=0 || Fogyaszto[i].need_w !=0)) // Ez vagy a kovi szar
+            if(Termelo[j].felhasznaltuk_e == false && Termelo[j].r !=0 && (Fogyaszto[i].need_r !=0 || Fogyaszto[i].need_r_g !=0 || Fogyaszto[i].need_r_b !=0 || Fogyaszto[i].need_w !=0)) // Ez vagy a kovi szar
             {
                 if(maszkok[i][Termelo[j].x][Termelo[j].y] < closest_R )
                 {
@@ -291,7 +291,7 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
                 qDebug() << "R" << j;
                 //Termelo[j].felhasznaltuk_e = true;
                 }
-            }       else if (Termelo[j].felhasznaltuk_e == false && (Fogyaszto[i].need_g !=0 || Fogyaszto[i].need_r_g !=0 || Fogyaszto[i].need_g_b !=0 || Fogyaszto[i].need_w !=0)){
+            }       else if (Termelo[j].felhasznaltuk_e == false && Termelo[j].g !=0 && (Fogyaszto[i].need_g !=0 || Fogyaszto[i].need_r_g !=0 || Fogyaszto[i].need_g_b !=0 || Fogyaszto[i].need_w !=0)){
                     if(maszkok[i][Termelo[j].x][Termelo[j].y] < closest_G )
                     {
                     closest_G = maszkok[i][Termelo[j].x][Termelo[j].y];
@@ -301,7 +301,7 @@ void MainWindow::CalculateRoutes(const QVector<Informacio>& Fogyaszto,QVector<In
                     //Termelo[j].felhasznaltuk_e = true;
                     //Ezt valahogy kikene zarni ezutan
                     }
-            }           else if (Termelo[j].felhasznaltuk_e == false && (Fogyaszto[i].need_b !=0 || Fogyaszto[i].need_r_b !=0 || Fogyaszto[i].need_g_b !=0 || Fogyaszto[i].need_w !=0)){
+            }           else if (Termelo[j].felhasznaltuk_e == false && Termelo[j].b !=0 && (Fogyaszto[i].need_b !=0 || Fogyaszto[i].need_r_b !=0 || Fogyaszto[i].need_g_b !=0 || Fogyaszto[i].need_w !=0)){
                         if(maszkok[i][Termelo[j].x][Termelo[j].y]<closest_B )
                         {
                         closest_B = maszkok[i][Termelo[j].x][Termelo[j].y];
@@ -359,6 +359,7 @@ QVector<Coord> MainWindow::CalculateRoutes_alt(const Coord& inspected_Producer,c
         {        setSelected(c.x, c.y, Builder::wayB);
         }
         murBmurB.setFieldmezo(c.x,c.y);
+        murBmurB.setFieldmezo(inspected_Consumer.x, inspected_Consumer.y);
     }
     return way;
 }
