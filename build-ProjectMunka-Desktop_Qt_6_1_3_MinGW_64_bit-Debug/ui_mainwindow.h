@@ -11,8 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCheckBox>
-#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -21,7 +19,6 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -43,21 +40,20 @@ public:
     QVBoxLayout *verticalLayout_3;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
-    QCheckBox *lineMode;
-    QPushButton *showWayButton;
-    QPushButton *animationButton;
     QLabel *label_3;
-    QLabel *fieldNumLabel;
+    QLabel *reqR;
     QLabel *label_4;
-    QLabel *shortWayLabel;
-    QGroupBox *groupBox_2;
-    QVBoxLayout *verticalLayout_4;
-    QFormLayout *formLayout;
-    QLabel *label;
-    QSpinBox *widthBox;
-    QLabel *label_2;
-    QSpinBox *heightBox;
-    QPushButton *resizeButton;
+    QLabel *reqG;
+    QLabel *label_5;
+    QLabel *reqB;
+    QLabel *label_6;
+    QLabel *reqRG;
+    QLabel *label_8;
+    QLabel *reqRB;
+    QLabel *label_10;
+    QLabel *reqBC;
+    QLabel *label_12;
+    QLabel *reqRGB;
     QPushButton *leptetbtn;
     QSpacerItem *verticalSpacer_3;
     QMenuBar *menubar;
@@ -109,90 +105,84 @@ public:
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         verticalLayout = new QVBoxLayout(groupBox);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        lineMode = new QCheckBox(groupBox);
-        lineMode->setObjectName(QString::fromUtf8("lineMode"));
-
-        verticalLayout->addWidget(lineMode);
-
-        showWayButton = new QPushButton(groupBox);
-        showWayButton->setObjectName(QString::fromUtf8("showWayButton"));
-
-        verticalLayout->addWidget(showWayButton);
-
-        animationButton = new QPushButton(groupBox);
-        animationButton->setObjectName(QString::fromUtf8("animationButton"));
-
-        verticalLayout->addWidget(animationButton);
-
         label_3 = new QLabel(groupBox);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         verticalLayout->addWidget(label_3);
 
-        fieldNumLabel = new QLabel(groupBox);
-        fieldNumLabel->setObjectName(QString::fromUtf8("fieldNumLabel"));
-        fieldNumLabel->setTextFormat(Qt::AutoText);
+        reqR = new QLabel(groupBox);
+        reqR->setObjectName(QString::fromUtf8("reqR"));
+        reqR->setTextFormat(Qt::AutoText);
 
-        verticalLayout->addWidget(fieldNumLabel);
+        verticalLayout->addWidget(reqR);
 
         label_4 = new QLabel(groupBox);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         verticalLayout->addWidget(label_4);
 
-        shortWayLabel = new QLabel(groupBox);
-        shortWayLabel->setObjectName(QString::fromUtf8("shortWayLabel"));
+        reqG = new QLabel(groupBox);
+        reqG->setObjectName(QString::fromUtf8("reqG"));
 
-        verticalLayout->addWidget(shortWayLabel);
+        verticalLayout->addWidget(reqG);
+
+        label_5 = new QLabel(groupBox);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        verticalLayout->addWidget(label_5);
+
+        reqB = new QLabel(groupBox);
+        reqB->setObjectName(QString::fromUtf8("reqB"));
+
+        verticalLayout->addWidget(reqB);
+
+        label_6 = new QLabel(groupBox);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        verticalLayout->addWidget(label_6);
+
+        reqRG = new QLabel(groupBox);
+        reqRG->setObjectName(QString::fromUtf8("reqRG"));
+
+        verticalLayout->addWidget(reqRG);
+
+        label_8 = new QLabel(groupBox);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        verticalLayout->addWidget(label_8);
+
+        reqRB = new QLabel(groupBox);
+        reqRB->setObjectName(QString::fromUtf8("reqRB"));
+
+        verticalLayout->addWidget(reqRB);
+
+        label_10 = new QLabel(groupBox);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        verticalLayout->addWidget(label_10);
+
+        reqBC = new QLabel(groupBox);
+        reqBC->setObjectName(QString::fromUtf8("reqBC"));
+
+        verticalLayout->addWidget(reqBC);
+
+        label_12 = new QLabel(groupBox);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        verticalLayout->addWidget(label_12);
+
+        reqRGB = new QLabel(groupBox);
+        reqRGB->setObjectName(QString::fromUtf8("reqRGB"));
+
+        verticalLayout->addWidget(reqRGB);
+
+        leptetbtn = new QPushButton(groupBox);
+        leptetbtn->setObjectName(QString::fromUtf8("leptetbtn"));
+
+        verticalLayout->addWidget(leptetbtn);
 
 
         verticalLayout_3->addWidget(groupBox);
-
-        groupBox_2 = new QGroupBox(centralwidget);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        verticalLayout_4 = new QVBoxLayout(groupBox_2);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        formLayout = new QFormLayout();
-        formLayout->setObjectName(QString::fromUtf8("formLayout"));
-        label = new QLabel(groupBox_2);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        formLayout->setWidget(0, QFormLayout::LabelRole, label);
-
-        widthBox = new QSpinBox(groupBox_2);
-        widthBox->setObjectName(QString::fromUtf8("widthBox"));
-        widthBox->setMinimum(5);
-        widthBox->setMaximum(50);
-
-        formLayout->setWidget(0, QFormLayout::FieldRole, widthBox);
-
-        label_2 = new QLabel(groupBox_2);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
-
-        heightBox = new QSpinBox(groupBox_2);
-        heightBox->setObjectName(QString::fromUtf8("heightBox"));
-        heightBox->setMinimum(5);
-        heightBox->setMaximum(50);
-
-        formLayout->setWidget(1, QFormLayout::FieldRole, heightBox);
-
-
-        verticalLayout_4->addLayout(formLayout);
-
-        resizeButton = new QPushButton(groupBox_2);
-        resizeButton->setObjectName(QString::fromUtf8("resizeButton"));
-
-        verticalLayout_4->addWidget(resizeButton);
-
-        leptetbtn = new QPushButton(groupBox_2);
-        leptetbtn->setObjectName(QString::fromUtf8("leptetbtn"));
-
-        verticalLayout_4->addWidget(leptetbtn);
-
-
-        verticalLayout_3->addWidget(groupBox_2);
 
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -218,18 +208,21 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("MainWindow", "Control", nullptr));
-        lineMode->setText(QCoreApplication::translate("MainWindow", "Box mode", nullptr));
-        showWayButton->setText(QCoreApplication::translate("MainWindow", "Show Shortest Way", nullptr));
-        animationButton->setText(QCoreApplication::translate("MainWindow", "Animate search", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "Discovered fields:", nullptr));
-        fieldNumLabel->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "Shortest way:", nullptr));
-        shortWayLabel->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Setting", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Width", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Height", nullptr));
-        resizeButton->setText(QCoreApplication::translate("MainWindow", "Resize", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("MainWindow", "Stats", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Req R", nullptr));
+        reqR->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Req G", nullptr));
+        reqG->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "Req B", nullptr));
+        reqB->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "Req RG", nullptr));
+        reqRG->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        label_8->setText(QCoreApplication::translate("MainWindow", "ReqRB", nullptr));
+        reqRB->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        label_10->setText(QCoreApplication::translate("MainWindow", "ReqBC", nullptr));
+        reqBC->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        label_12->setText(QCoreApplication::translate("MainWindow", "ReqRGB", nullptr));
+        reqRGB->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         leptetbtn->setText(QCoreApplication::translate("MainWindow", "leptet", nullptr));
     } // retranslateUi
 

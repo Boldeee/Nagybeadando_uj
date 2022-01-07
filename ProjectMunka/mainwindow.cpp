@@ -372,22 +372,31 @@ void MainWindow::advance()
 }
 void MainWindow::spawn()
 {
- Coord prev(-1,-1);
+ //Coord prev(-1,-1);
  for(int j=0; j<Convbelts.count(); j++ )
  {
      for(QMap <QString, QVector<Coord>>::iterator it=Convbelts[j].begin();it!=Convbelts[j].end();it++)
      {
              if(lepteto%(it.key().back().digitValue())==0)
              {
-                 if(it.key().first(0)=="r")Beltmasolat[j][it.key()][0].r=1;
-                 if(it.key().first(0)=="g")Beltmasolat[j][it.key()][0].g=1;
-                 if(it.key().first(0)=="b")Beltmasolat[j][it.key()][0].b=1;
+                 if(it.key()[0]=='r')
+                 {Beltmasolat[j][it.key()][Beltmasolat[j][it.key()].size()-1].r+=1;
+                     qDebug()<<"asdd";
+                 }else
+                 if(it.key()[0]=='g')
+                 {Beltmasolat[j][it.key()][Beltmasolat[j][it.key()].size()-1].g+=1;
+                     qDebug()<<"kek";
+                 }else
+                 if(it.key()[0]=='b')
+                 {Beltmasolat[j][it.key()][Beltmasolat[j][it.key()].size()-1].b+=1;
+                     qDebug()<<"333";
+                 }
              }
              /*for(int timer=0;timer<it.key().back().digitValue();timer++){
              delay(50);
              }*/
              //int f=Convbelts[j][it.key()].size()-1;
-             //qDebug()<<Convbelts[it.key()][std::min(i,f)].x<<Convbelts[it.key()][std::min(i,f)].y;
+             //qDebug()<<Convbelts[j][it.key()][std::min(i,f)].x<<Convbelts[j][it.key()][std::min(i,f)].y;
      }
  }
      /*if(prev.x!=-1&&prev.y!=-1)
@@ -407,9 +416,23 @@ void MainWindow::eloreleptet()
         eattheweak(it.key() , j);
         for (int i=0;i<Beltmasolat[j][it.key()].size()-1;i++)
         {
-            Beltmasolat[j][it.key()][i]=Beltmasolat[j][it.key()][i+1];//tovabb adja a szineket, hatulrol huzza a conveyor-n
+            Beltmasolat[j][it.key()][i].r+=Beltmasolat[j][it.key()][i+1].r;
+            Beltmasolat[j][it.key()][i+1].r=0;
+            Beltmasolat[j][it.key()][i].r=std::min(1,Beltmasolat[j][it.key()][i].r);
+
+            Beltmasolat[j][it.key()][i].g+=Beltmasolat[j][it.key()][i+1].g;
+            Beltmasolat[j][it.key()][i+1].g=0;
+            Beltmasolat[j][it.key()][i].g=std::min(1,Beltmasolat[j][it.key()][i].g);
+
+            Beltmasolat[j][it.key()][i].b+=Beltmasolat[j][it.key()][i+1].b;
+            Beltmasolat[j][it.key()][i+1].b=0;
+            Beltmasolat[j][it.key()][i].b=std::min(1,Beltmasolat[j][it.key()][i].b);
+            qDebug()<<Beltmasolat[j][it.key()][i].r<<Beltmasolat[j][it.key()][i].g<<Beltmasolat[j][it.key()][i].b;
+
+            //tovabb adja a szineket, hatulrol huzza a conveyor-n
             szintesztelo(it.key(),i, j);
         }
+        qDebug()<<"beltvege";
     }
     }
 }
@@ -431,7 +454,7 @@ void MainWindow::szintesztelo(QString itkey, int iterator, int j)
         {
         setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRB);
         }
-    setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convR);
+    setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::Producer_Red);
 
     }else if(Beltmasolat[j][itkey][iterator].g==1)
     {
@@ -449,7 +472,7 @@ void MainWindow::szintesztelo(QString itkey, int iterator, int j)
         {
         setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convGB);
         }
-    setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convG);
+    setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::Producer_Green);
 
 
     }else if(Beltmasolat[j][itkey][iterator].b==1)
@@ -468,15 +491,17 @@ void MainWindow::szintesztelo(QString itkey, int iterator, int j)
         {
         setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convRB);
         }
-    setdoboz(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::convB);
+    setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::Producer_Blue);
     }
-    if(itkey.first(0)=="r")
+    else if(itkey[0]=='r')
     {
         setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::wayR);
-    }   if(itkey.first(0)=="g")
+    }
+    else if(itkey[0]=='g')
     {
         setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::wayG);
-    }   if(itkey.first(0)=="b")
+    }
+    else if(itkey[0]=='b')
     {
         setSelected(Convbelts[j][itkey][iterator].x,Convbelts[j][itkey][iterator].y,Builder::wayB);
     }

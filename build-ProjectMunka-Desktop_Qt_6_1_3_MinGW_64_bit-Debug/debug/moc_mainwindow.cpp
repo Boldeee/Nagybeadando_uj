@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    const uint offsetsAndSize[98];
-    char stringdata0[611];
+    const uint offsetsAndSize[100];
+    char stringdata0[600];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs), len 
@@ -69,17 +69,18 @@ QT_MOC_LITERAL(353, 18), // "leghosszabbkereses"
 QT_MOC_LITERAL(372, 27), // "QMap<QString,QList<Coord>>&"
 QT_MOC_LITERAL(400, 8), // "keresett"
 QT_MOC_LITERAL(409, 5), // "meret"
-QT_MOC_LITERAL(415, 28), // "QMap<QString,QList<rgbszin>>"
-QT_MOC_LITERAL(444, 29), // "QMap<QString,QList<rgbszin>>&"
-QT_MOC_LITERAL(474, 15), // "beltmasolat_alt"
-QT_MOC_LITERAL(490, 7), // "advance"
-QT_MOC_LITERAL(498, 11), // "eloreleptet"
-QT_MOC_LITERAL(510, 12), // "szintesztelo"
-QT_MOC_LITERAL(523, 5), // "itkey"
-QT_MOC_LITERAL(529, 8), // "iterator"
-QT_MOC_LITERAL(538, 24), // "on_showWayButton_clicked"
-QT_MOC_LITERAL(563, 26), // "on_animationButton_clicked"
-QT_MOC_LITERAL(590, 20) // "on_leptetbtn_clicked"
+QT_MOC_LITERAL(415, 38), // "QMap<int,QMap<QString,QList<r..."
+QT_MOC_LITERAL(454, 39), // "QMap<int,QMap<QString,QList<r..."
+QT_MOC_LITERAL(494, 15), // "beltmasolat_alt"
+QT_MOC_LITERAL(510, 7), // "advance"
+QT_MOC_LITERAL(518, 11), // "eloreleptet"
+QT_MOC_LITERAL(530, 12), // "szintesztelo"
+QT_MOC_LITERAL(543, 5), // "itkey"
+QT_MOC_LITERAL(549, 8), // "iterator"
+QT_MOC_LITERAL(558, 1), // "j"
+QT_MOC_LITERAL(560, 10), // "eattheweak"
+QT_MOC_LITERAL(571, 7), // "refresh"
+QT_MOC_LITERAL(579, 20) // "on_leptetbtn_clicked"
 
     },
     "MainWindow\0setupField\0\0XX\0YY\0setField\0"
@@ -93,13 +94,11 @@ QT_MOC_LITERAL(590, 20) // "on_leptetbtn_clicked"
     "Coord\0inspected_Producer\0inspected_Consumer\0"
     "szin\0spawn\0leghosszabbkereses\0"
     "QMap<QString,QList<Coord>>&\0keresett\0"
-    "meret\0QMap<QString,QList<rgbszin>>\0"
-    "QMap<QString,QList<rgbszin>>&\0"
+    "meret\0QMap<int,QMap<QString,QList<rgbszin>>>\0"
+    "QMap<int,QMap<QString,QList<rgbszin>>>&\0"
     "beltmasolat_alt\0advance\0eloreleptet\0"
-    "szintesztelo\0itkey\0iterator\0"
-    "on_showWayButton_clicked\0"
-    "on_animationButton_clicked\0"
-    "on_leptetbtn_clicked"
+    "szintesztelo\0itkey\0iterator\0j\0eattheweak\0"
+    "refresh\0on_leptetbtn_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -129,10 +128,10 @@ static const uint qt_meta_data_MainWindow[] = {
       37,    1,  155,    2, 0x0a,   27 /* Public */,
       41,    0,  158,    2, 0x0a,   29 /* Public */,
       42,    0,  159,    2, 0x0a,   30 /* Public */,
-      43,    2,  160,    2, 0x0a,   31 /* Public */,
-      46,    0,  165,    2, 0x08,   34 /* Private */,
-      47,    0,  166,    2, 0x08,   35 /* Private */,
-      48,    0,  167,    2, 0x08,   36 /* Private */,
+      43,    3,  160,    2, 0x0a,   31 /* Public */,
+      47,    2,  167,    2, 0x0a,   35 /* Public */,
+      48,    0,  172,    2, 0x0a,   38 /* Public */,
+      49,    0,  173,    2, 0x08,   39 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -147,8 +146,8 @@ static const uint qt_meta_data_MainWindow[] = {
     0x80000000 | 38, 0x80000000 | 39,   40,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, QMetaType::Int,   44,   45,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::Int, QMetaType::Int,   44,   45,   46,
+    QMetaType::Void, QMetaType::QString, QMetaType::Int,   44,   46,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -173,13 +172,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 7: _t->spawn(); break;
         case 8: { int _r = _t->leghosszabbkereses((*reinterpret_cast< QMap<QString,QList<Coord>>(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 9: { QMap<QString,QList<rgbszin>> _r = _t->meret((*reinterpret_cast< QMap<QString,QList<rgbszin>>(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QMap<QString,QList<rgbszin>>*>(_a[0]) = std::move(_r); }  break;
+        case 9: { QMap<int,QMap<QString,QList<rgbszin>>> _r = _t->meret((*reinterpret_cast< QMap<int,QMap<QString,QList<rgbszin>>>(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QMap<int,QMap<QString,QList<rgbszin>>>*>(_a[0]) = std::move(_r); }  break;
         case 10: _t->advance(); break;
         case 11: _t->eloreleptet(); break;
-        case 12: _t->szintesztelo((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 13: _t->on_showWayButton_clicked(); break;
-        case 14: _t->on_animationButton_clicked(); break;
+        case 12: _t->szintesztelo((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 13: _t->eattheweak((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 14: _t->refresh(); break;
         case 15: _t->on_leptetbtn_clicked(); break;
         default: ;
         }
@@ -194,7 +193,7 @@ const QMetaObject MainWindow::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_MainWindow_t
 
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<QVector<Informacio>> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<Informacio> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QVector<QVector<double>> &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<Informacio> &, std::false_type>, QtPrivate::TypeAndForceComplete<QVector<Informacio> &, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<matrix> &, std::false_type>, QtPrivate::TypeAndForceComplete<QVector<Coord>, std::false_type>, QtPrivate::TypeAndForceComplete<const Coord &, std::false_type>, QtPrivate::TypeAndForceComplete<const Coord &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QMap<QString,QVector<Coord>> &, std::false_type>, QtPrivate::TypeAndForceComplete<QMap<QString,QVector<rgbszin>>, std::false_type>, QtPrivate::TypeAndForceComplete<QMap<QString,QVector<rgbszin>> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<QVector<Informacio>> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<Informacio> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QVector<QVector<double>> &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<double, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<Informacio> &, std::false_type>, QtPrivate::TypeAndForceComplete<QVector<Informacio> &, std::false_type>, QtPrivate::TypeAndForceComplete<const QVector<matrix> &, std::false_type>, QtPrivate::TypeAndForceComplete<QVector<Coord>, std::false_type>, QtPrivate::TypeAndForceComplete<const Coord &, std::false_type>, QtPrivate::TypeAndForceComplete<const Coord &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QMap<QString,QVector<Coord>> &, std::false_type>, QtPrivate::TypeAndForceComplete<QMap<int,QMap<QString,QVector<rgbszin>> >, std::false_type>, QtPrivate::TypeAndForceComplete<QMap<int,QMap<QString,QVector<rgbszin>> > &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
